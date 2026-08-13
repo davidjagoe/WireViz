@@ -1,0 +1,174 @@
+connectors:
+
+  # Main Control Panel
+
+  +MCP-XESD: &esd
+    pins: [1, 2]
+    show_pincount: false
+
+  +MCP-X1: &mcp-x1
+    pins: [PE, 1, 2, 3, 4, 5, 6]
+    show_pincount: false
+
+  # Drive Panel
+  +DP-X1: &dp-x1
+    pins: [PE, 1, 2, 3, 4]
+    show_pincount: false
+
+  +DP-X2: &dp-x2
+    pins: [PE, 1, 2, 3, 4]
+    show_pincount: false
+
+  +DP-X3: &dp-x3
+    pincount: 9
+    show_pincount: false
+
+  +DP-X4: &dp-x4
+    pincount: 9
+    show_pincount: false
+
+
+  # Actuator Junction Box
+  +AJB-XEA:
+    pins: [PE]
+    show_pincount: false
+
+  +AJB-X1-MCP:
+    pins: [1, 2, 3U, 4U, 5U, 6U]
+    pincolors: [BU, BU, BU, BU, BU, BU]
+    show_pincount: false
+    image:
+      src: ./img/3-deck.png
+      caption: Use the upper terminal that is marked blue.
+      width: 200
+    notes: |
+      * Terminal 3U means land the wire on the upper deck of the block.    
+      * Note that there are two of each block 3-6.
+      * (Terminals for field wiring marked BU for clarity.)
+      
+    
+
+  +AJB-X1:
+    <<: *dp-x1
+
+  +AJB-X2:
+    <<: *dp-x2
+
+  +AJB-X3:
+    <<: *dp-x3
+
+  +AJB-X4:
+    <<: *dp-x4
+
+  +AJB-XESD:
+    <<: *esd
+
+cables:
+
+  ACTUATOR-PE:
+    category: bundle
+    length: 25 ft
+    wirecount: 1
+    colors: [GNYE]
+    pn: HOLD
+    manufacturer: HOLD
+    mpn: HOLD
+    notes: O.D. HOLD
+
+  ACTUATOR-DC-POWER:
+    # gauge:
+    # show_equiv: true
+    length: 25 ft
+    # color: BK
+    color_code: DIN
+    wirecount: 6
+    pn: HOLD
+    manufacturer: Lapp
+    mpn: HOLD
+    notes: O.D. HOLD
+
+  ESD-STATUS:
+    gauge: 1
+    show_equiv: true
+    length: 25 ft
+    color: BK
+    color_code: DIN
+    wirecount: 2
+    pn: HOLD
+    manufacturer: Lapp
+    mpn: 1030279
+    notes: O.D. 0.22 in
+
+  M1-POWER: &motor_power
+    gauge: 12 AWG
+    show_equiv: true
+    length: 25 ft
+    color: BK
+    colors: [BK, BK, BK, GNYE]
+    wirecount: 4
+    shield: true
+    pn: 10300516
+    manufacturer: LUTZE
+    mpn: A3311204
+    notes: OD 0.437 in (11.1 mm)
+
+  M2-POWER:
+    <<: *motor_power
+    
+  M1-RESOLVER: &resolver
+    length: 25 ft
+    color: GN
+    colors: [WH, BN, SR, GN, YE, SR, PK, GY]
+    wirelabels: [PR1(A+), PR1(A-), SHIELD (PAIR 1), PR2(B+), PR2(B-), SHIELD (PAIR 2), V+, V-]
+    inner_shields: [SHIELD (PAIR 1), SHIELD (PAIR 2)]
+    shield: true
+    pn: 103xxxxx
+    manufacturer: Lapp
+    mpn: 0036929
+    show_wirecount: false
+    show_wirenumbers: false
+    notes: |
+      Resolver cable
+      2 x (2 x 0.25 mm) + 2 x 0.5 mm
+      O.D. 0.343 in (8.7 mm)
+    
+  M2-RESOLVER:
+    <<: *resolver
+
+
+connections:
+
+  -
+    - +MCP-X1: [PE]
+    - ACTUATOR-PE: [1]
+    - +AJB-XEA: [PE]
+
+  -
+    - +MCP-X1: [1-6]
+    - ACTUATOR-DC-POWER: [1-6]
+    - +AJB-X1-MCP: [1, 2, 3U, 4U, 5U, 6U]
+
+  -
+    - +MCP-XESD: [1, 2]
+    - ESD-STATUS: [1, 2]
+    - +AJB-XESD: [1, 2]
+
+  -
+    - +DP-X1: [PE, 1, 2, 3, 4]
+    - M1-POWER: [1, 2, 3, 4, s]
+    - +AJB-X1: [PE, 1, 2, 3, 4]
+
+  -
+    - +DP-X2: [PE, 1, 2, 3, 4]
+    - M2-POWER: [1, 2, 3, 4, s]
+    - +AJB-X2: [PE, 1, 2, 3, 4]
+
+  -
+    - +DP-X3: [1-9]
+    - M1-RESOLVER: [1-8, s]
+    - +AJB-X3: [1-9]
+
+  -
+    - +DP-X4: [1-9]
+    - M2-RESOLVER: [1-8, s]
+    - +AJB-X4: [1-9]

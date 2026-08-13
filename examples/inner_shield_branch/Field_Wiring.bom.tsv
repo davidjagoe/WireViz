@@ -1,0 +1,7 @@
+Id	Description	Qty	Unit	Designators	P/N	Manufacturer	MPN
+1	Cable, 2 x 1 mm², BK	25	ft	ESD-STATUS	HOLD	Lapp	1030279
+2	Cable, 4 x 12 AWG shielded, BK	50	ft	M1-POWER, M2-POWER	10300516	LUTZE	A3311204
+3	Cable, 6 wires	25	ft	ACTUATOR-DC-POWER	HOLD	Lapp	HOLD
+4	Cable, 8 wires shielded, GN	50	ft	M1-RESOLVER, M2-RESOLVER	103xxxxx	Lapp	0036929
+5	Connector	13		+AJB-X1, +AJB-X1-MCP, +AJB-X2, +AJB-X3, +AJB-X4, +AJB-XEA, +AJB-XESD, +DP-X1, +DP-X2, +DP-X3, +DP-X4, +MCP-X1, +MCP-XESD			
+6	Wire, GNYE	25	ft	ACTUATOR-PE	HOLD	HOLD	HOLD
