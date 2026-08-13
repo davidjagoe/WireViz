@@ -6,8 +6,16 @@ connectors:
     pins: [1, 2]
     show_pincount: false
 
-  +MCP-X1: &mcp-x1
+  +MCP-X1:
     pins: [PE, 1, 2, 3, 4, 5, 6]
+    show_pincount: false
+
+  +MCP-X2:
+    pins: [1, 2, 3, 4, 5, 6]
+    show_pincount: false
+
+  +MCP-X4: &field-analog-terminals
+    pins: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L]
     show_pincount: false
 
   # Drive Panel
@@ -34,11 +42,11 @@ connectors:
     show_pincount: false
 
   +AJB-X1-MCP:
-    pins: [1, 2, 3U, 4U, 5U, 6U]
-    pincolors: [BU, BU, BU, BU, BU, BU]
+    pins: [1, 2L, 3U, 4U, 5U, 6U]
+    pincolors: [None, BU, BU, BU, BU, BU]
     show_pincount: false
     image:
-      src: ./img/3-deck.png
+      src: ./img/3-deck-upper.png
       caption: Use the upper terminal that is marked blue.
       width: 200
     notes: |
@@ -46,6 +54,23 @@ connectors:
       * Note that there are two of each block 3-6.
       * (Terminals for field wiring marked BU for clarity.)
       
+  +AJB-X2-MCP:
+    pins: [1U, 2L, 3L, 4L, 5L, 6L]
+    pincolors: [BU, BU, BU, BU, BU, BU]
+    show_pincount: false
+    image:
+      src: ./img/3-deck-lower.png
+      caption: |
+        Use the terminal that is marked blue.
+        (Upper for T1, lower for 2-6.)
+      width: 200
+    notes: |
+      * Terminal 3U means land the wire on the upper deck of the block.    
+      * Note that there are two of each block 3-6.
+      * (Terminals for field wiring marked BU for clarity.)
+
+  +AJB-X4-MCP:
+    <<: *field-analog-terminals
     
 
   +AJB-X1:
@@ -75,6 +100,18 @@ cables:
     mpn: HOLD
     notes: O.D. HOLD
 
+  ACTUATOR-DISCRETE:
+    # gauge:
+    # show_equiv: true
+    length: 25 ft
+    # color: BK
+    color_code: DIN
+    wirecount: 5
+    pn: HOLD
+    manufacturer: Lapp
+    mpn: HOLD
+    notes: O.D. HOLD
+
   ACTUATOR-DC-POWER:
     # gauge:
     # show_equiv: true
@@ -86,6 +123,22 @@ cables:
     manufacturer: Lapp
     mpn: HOLD
     notes: O.D. HOLD
+
+  ACTUATOR-ANALOG:
+    gauge: 0.5
+    show_equiv: true
+    length: 25 ft
+    color: BK
+    colors: [BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR]
+    wirelabels: [1(BK), 1(WH), SHIELD (PAIR 1), 2(BK), 2(WH), SHIELD (PAIR 2), 3(BK), 3(WH), SHIELD (PAIR 3), 4(BK), 4(WH), SHIELD (PAIR 4), 5(BK), 5(WH), SHIELD (PAIR 5), 6(BK), 6(WH), SHIELD (PAIR 6), 7(BK), 7(WH), SHIELD (PAIR 7), 8(BK), 8(WH), SHIELD (PAIR 8)]
+    inner_shields: [SHIELD (PAIR 1), SHIELD (PAIR 2), SHIELD (PAIR 3), SHIELD (PAIR 4), SHIELD (PAIR 5), SHIELD (PAIR 6), SHIELD (PAIR 7), SHIELD (PAIR 8)]
+    show_wirenumbers: false
+    pn: HOLD
+    manufacturer: Lapp
+    mpn: 0032450
+    notes: |
+      O.D. 0.567 in
+      Pair 8 unused. Coil and insulate at both ends.
 
   ESD-STATUS:
     gauge: 1
@@ -144,9 +197,24 @@ connections:
     - +AJB-XEA: [PE]
 
   -
-    - +MCP-X1: [1-6]
-    - ACTUATOR-DC-POWER: [1-6]
-    - +AJB-X1-MCP: [1, 2, 3U, 4U, 5U, 6U]
+    - +MCP-X1: [2-6]
+    - ACTUATOR-DC-POWER: [1-5]
+    - +AJB-X1-MCP: [2L, 3U, 4U, 5U, 6U]
+
+  -
+    - +MCP-X2: [2-6]
+    - ACTUATOR-DISCRETE: [1-5]
+    - +AJB-X2-MCP: [2L, 3L, 4L, 5L, 6L]
+
+  -
+    - +MCP-X2: [1]
+    - ACTUATOR-DC-POWER: [6]
+    - +AJB-X2-MCP: [1U]
+
+  -
+    - +MCP-X4: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L]
+    - ACTUATOR-ANALOG: [1-21]
+    - +AJB-X4-MCP: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L]
 
   -
     - +MCP-XESD: [1, 2]
