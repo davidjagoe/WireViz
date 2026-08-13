@@ -266,6 +266,9 @@ class Cable:
     notes: Optional[MultilineHypertext] = None
     colors: List[Colors] = field(default_factory=list)
     wirelabels: List[Wire] = field(default_factory=list)
+
+    # List which wires are actually inner shields
+    inner_shields: List[Wire] = field(default_factory=list)
     color_code: Optional[ColorScheme] = None
     show_name: Optional[bool] = None
     show_wirecount: bool = True

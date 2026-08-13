@@ -339,6 +339,11 @@ class Harness:
             wirehtml.append('<table border="0" cellspacing="0" cellborder="0">')
             wirehtml.append("   <tr><td>&nbsp;</td></tr>")
 
+            def is_inner_shield(index, label):
+                return index in cable.inner_shields or (
+                    label is not None and label in cable.inner_shields
+                )
+
             for i, (connection_color, wirelabel) in enumerate(
                 zip_longest(cable.colors, cable.wirelabels), 1
             ):
@@ -352,7 +357,7 @@ class Harness:
                 colorstr = wv_colors.translate_color(
                     connection_color, self.options.color_mode
                 )
-                if colorstr:
+                if colorstr and not is_inner_shield(i, wirelabel):
                     wireinfo.append(colorstr)
                 if cable.wirelabels:
                     wireinfo.append(wirelabel if wirelabel is not None else "")
@@ -362,8 +367,11 @@ class Harness:
                 wirehtml.append(f"    <td><!-- {i}_out --></td>")
                 wirehtml.append("   </tr>")
 
-                # fmt: off
-                bgcolors = ['#000000'] + get_color_hex(connection_color, pad=pad) + ['#000000']
+                if is_inner_shield(i, wirelabel):
+                    bgcolors = ['#000000']
+                else:
+                    # fmt: off
+                    bgcolors = ['#000000'] + get_color_hex(connection_color, pad=pad) + ['#000000']
                 wirehtml.append(f"   <tr>")
                 wirehtml.append(f'    <td colspan="3" border="0" cellspacing="0" cellpadding="0" port="w{i}" height="{(2 * len(bgcolors))}">')
                 wirehtml.append('     <table cellspacing="0" cellborder="0" border="0">')
@@ -448,16 +456,21 @@ class Harness:
             for connection in cable.connections:
                 if isinstance(connection.via_port, int):
                     # check if it's an actual wire and not a shield
-                    dot.attr(
-                        "edge",
-                        color=":".join(
-                            ["#000000"]
-                            + wv_colors.get_color_hex(
-                                cable.colors[connection.via_port - 1], pad=pad
-                            )
-                            + ["#000000"]
-                        ),
-                    )
+                    _idx = connection.via_port
+                    _lbl = cable.wirelabels[_idx - 1] if len(cable.wirelabels) >= _idx else None
+                    if _idx in cable.inner_shields or (_lbl is not None and _lbl in cable.inner_shields):
+                        dot.attr("edge", color="#000000")
+                    else:
+                        dot.attr(
+                            "edge",
+                            color=":".join(
+                                ["#000000"]
+                                + wv_colors.get_color_hex(
+                                    cable.colors[connection.via_port - 1], pad=pad
+                                )
+                                + ["#000000"]
+                            ),
+                        )
                 else:  # it's a shield connection
                     # shield is shown with specified color and black borders, or as a thin black wire otherwise
                     dot.attr(
