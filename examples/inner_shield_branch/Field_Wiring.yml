@@ -1,6 +1,45 @@
 connectors:
 
+  # Customer
+  +SIS-XESD:
+    pins: [xx, yy]
+    show_pincount: false
+    notes: Details by others
+  
+  +SUPPLY-X400:
+    pins: [L1, L2, L3, N, PE]
+    show_pincount: false
+    notes: Details by others
+
+
+  +SUPPLY-X230:
+    pins: [L, N]
+    show_pincount: false
+    notes: Details by others
+
+  +LOCAL-EARTH:
+    style: simple
+    image:
+      src: ./img/pe-symbol.png
+      caption: Local Earth
+      width: 50
+
+
   # Main Control Panel
+  +MCP/6Q1:
+    pins: [1, 3, 5, N]
+    show_pincount: false
+    notes: Circuit breaker
+
+  +MCP/6Q2:
+    pins: [1, 3]
+    show_pincount: false
+    notes: Circuit breaker
+
+  +MCP-XEA:
+    pins: [1, 2]
+    pinlabels: [PE, PE]
+    show_pincount: false
 
   +MCP-XESD: &esd
     pins: [1, 2]
@@ -17,6 +56,10 @@ connectors:
   +MCP-X4: &field-analog-terminals
     pins: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L]
     show_pincount: false
+    image:
+      src: ./img/3-deck-analog-earthing.png
+      caption: 3-deck terminal block with shield to rail.
+      width: 200
 
   # Drive Panel
   +DP-X1: &dp-x1
@@ -71,6 +114,10 @@ connectors:
 
   +AJB-X4-MCP:
     <<: *field-analog-terminals
+    image:
+      src: ./img/3-deck-analog-thru.png
+      caption: 3-deck through terminal block.
+      width: 200
     
 
   +AJB-X1:
@@ -86,7 +133,10 @@ connectors:
     <<: *dp-x4
 
   +AJB-XESD:
-    <<: *esd
+    pins: [1L, 1U, 2L, 2U]
+    show_pincount: false
+    notes: Upper terminals for solenoid connections.
+
 
 cables:
 
@@ -188,8 +238,53 @@ cables:
   M2-RESOLVER:
     <<: *resolver
 
+# Customer provided cables
+  SIS-ESD:
+    wirecount: 2
+    notes: |
+      Supplied by others
+      Details by others
+
+  SUPPLY-400V:
+    colors: [BKBN, BK, BKGY, LB, GNYE]
+    notes: |
+      Supplied by others
+      Details by others
+    
+  SUPPLY-230V:
+    colors: [BN, LB]
+    notes:  |
+      Supplied by others
+      Details by others
+
+  LOCAL-EARTH:
+    colors: [GNYE]
+    notes:  |
+      Supplied by others
+      Details by others
+
 
 connections:
+
+  -
+    - +SUPPLY-X400: [L1, L2, L3, N]
+    - SUPPLY-400V: [1-4]
+    - +MCP/6Q1: [1, 3, 5, N]
+
+  -
+    - +SUPPLY-X400: [PE]
+    - SUPPLY-400V: [5]
+    - +MCP-XEA: [1]
+
+  -
+    - +SUPPLY-X230: [L, N]
+    - SUPPLY-230V: [1, 2]
+    - +MCP/6Q2: [1, 3]
+
+  -
+    - +LOCAL-EARTH: [1]
+    - LOCAL-EARTH: [1]
+    - +MCP-XEA: [2]
 
   -
     - +MCP-X1: [PE]
@@ -219,16 +314,21 @@ connections:
   -
     - +MCP-XESD: [1, 2]
     - ESD-STATUS: [1, 2]
-    - +AJB-XESD: [1, 2]
+    - +AJB-XESD: [1L, 2L]
+
+  -
+    - +AJB-XESD: [1L, 2L]
+    - SIS-ESD: [1, 2]
+    - +SIS-XESD: [xx, yy]
 
   -
     - +DP-X1: [PE, 1, 2, 3, 4]
-    - M1-POWER: [1, 2, 3, 4, s]
+    - M1-POWER: [4, 1, 2, 3, s]
     - +AJB-X1: [PE, 1, 2, 3, 4]
 
   -
     - +DP-X2: [PE, 1, 2, 3, 4]
-    - M2-POWER: [1, 2, 3, 4, s]
+    - M2-POWER: [4, 1, 2, 3, s]
     - +AJB-X2: [PE, 1, 2, 3, 4]
 
   -
