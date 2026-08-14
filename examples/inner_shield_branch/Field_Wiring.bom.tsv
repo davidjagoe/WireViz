@@ -6,10 +6,11 @@ Id	Description	Qty	Unit	Designators	P/N	Manufacturer	MPN
 5	Cable, 5 wires	25	ft	ACTUATOR-DISCRETE	HOLD	Lapp	HOLD
 6	Cable, 6 wires	25	ft	ACTUATOR-DC-POWER	HOLD	Lapp	HOLD
 7	Cable, 8 wires shielded, GN	50	ft	M1-RESOLVER, M2-RESOLVER	103xxxxx	Lapp	0036929
-8	Cable, By others, 15 wires	0	m	DCS-ANALOG			
-9	Cable, By others, 2 wires	0	m	SUPPLY-230V			
-10	Cable, By others, 5 wires	0	m	SUPPLY-400V			
-11	Connector	21		+AJB-X1, +AJB-X1-MCP, +AJB-X2, +AJB-X2-MCP, +AJB-X3, +AJB-X4, +AJB-X4-MCP, +AJB-XEA, +AJB-XESD, +DP-X1, +DP-X2, +DP-X3, +DP-X4, +MCP-X1, +MCP-X2, +MCP-X3, +MCP-X4, +MCP-X5(T1), +MCP-X5(T2-T5), +MCP-XEA, +MCP-XESD			
-12	Connector, By others	6		+DCS-ANALOG, +DCS-DISCRETE, +SIS-XESD, +SUPPLY-X230, +SUPPLY-X400			
-13	Connector, Circuit breaker	2		+MCP/6Q1, +MCP/6Q2			
-14	Wire, GNYE	25	ft	ACTUATOR-PE	HOLD	HOLD	HOLD
+8	Cable, By others, 12 wires	0	m	DCS-DISCRETE			
+9	Cable, By others, 15 wires	0	m	DCS-ANALOG			
+10	Cable, By others, 2 wires	0	m	SIS-ESD, SUPPLY-230V			
+11	Cable, By others, 5 wires	0	m	SUPPLY-400V			
+12	Connector	21		+AJB-X1, +AJB-X1-MCP, +AJB-X2, +AJB-X2-MCP, +AJB-X3, +AJB-X4, +AJB-X4-MCP, +AJB-XEA, +AJB-XESD, +DP-X1, +DP-X2, +DP-X3, +DP-X4, +MCP-X1, +MCP-X2, +MCP-X3, +MCP-X4, +MCP-X5(T1), +MCP-X5(T2-T5), +MCP-XEA, +MCP-XESD			
+13	Connector, By others	6		+DCS-ANALOG, +DCS-DISCRETE, +SIS-XESD, +SUPPLY-X230, +SUPPLY-X400			
+14	Connector, Circuit breaker	2		+MCP/6Q1, +MCP/6Q2			
+15	Wire, GNYE	25	ft	ACTUATOR-PE	HOLD	HOLD	HOLD

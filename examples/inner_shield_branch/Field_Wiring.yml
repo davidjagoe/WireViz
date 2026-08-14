@@ -90,10 +90,14 @@ connectors:
   +MCP-X3:
     pincount: 12
     show_pincount: false
+    notes: |
+      Loop power supplied by DCS.
+      MCP discrete outputs are dry contacts.
 
   +MCP-X5(T1):
     pins: [1U, 1M, 1L]
     show_pincount: false
+    notes: Loop power supplied by MCP power supply unit.
     image:
       src: ./img/3-deck-analog-earthing.png
       caption: 3-deck fuse terminal block with shield to rail.
@@ -102,6 +106,11 @@ connectors:
   +MCP-X5(T2-T5):
     pins: [2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L]
     show_pincount: false
+    notes: Loop power supplied by MCP signal isolator.
+    image:
+      src: ./img/3-deck-knife.png
+      caption: 3-deck knife disconnect terminal block with shield to rail.
+      width: 200
 
   # Drive Panel
   +DP-X1: &dp-x1
@@ -296,9 +305,6 @@ cables:
     show_wirecount: false
     colors: [GNYE]
 
-  # DCS-DISCRETE:
-  #   show_wirecount: false
-    
   DCS-ANALOG:
     type: By others
     show_wirecount: false
@@ -307,13 +313,27 @@ cables:
     inner_shields: [SHIELD (PAIR 1), SHIELD (PAIR 2), SHIELD (PAIR 3), SHIELD (PAIR 4), SHIELD (PAIR 5)]
     show_wirenumbers: false
 
+  DCS-DISCRETE:
+    type: By others
+    show_wirecount: false
+    wirecount: 12
+    color_code: BW
+    show_wirenumbers: false
+
+  SIS-ESD:
+    type: By others
+    show_wirecount: false
+    wirecount: 2
+    color_code: BW
+    show_wirenumbers: false
+
 
 connections:
 
   # DCS DISCRETE CONNECTIONS
   -
     - +DCS-DISCRETE: [1-12]
-    - --
+    - DCS-DISCRETE: [1-12]
     - +MCP-X3: [1-12]
 
   # Could MCP show contacts on the drawing like this
@@ -340,7 +360,7 @@ connections:
 
   -
     - +AJB-XESD: [1L, 2L]
-    - --
+    - SIS-ESD: [1, 2]
     - +SIS-XESD: [+, -]
 
   -
