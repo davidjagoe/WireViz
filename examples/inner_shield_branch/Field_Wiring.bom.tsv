@@ -1,12 +1,14 @@
 Id	Description	Qty	Unit	Designators	P/N	Manufacturer	MPN
 1	Cable, 1 wires	0	m	LOCAL-EARTH			
-2	Cable, 2 wires	0	m	SIS-ESD, SUPPLY-230V			
-3	Cable, 2 x 1 mm², BK	25	ft	ESD-STATUS	HOLD	Lapp	1030279
-4	Cable, 24 x 0.5 mm², BK	25	ft	ACTUATOR-ANALOG	HOLD	Lapp	13608
-5	Cable, 4 x 12 AWG shielded, BK	50	ft	M1-POWER, M2-POWER	10300516	LUTZE	A3311204
-6	Cable, 5 wires	25	ft	ACTUATOR-DISCRETE	HOLD	Lapp	HOLD
-7	Cable, 5 wires	0	m	SUPPLY-400V			
-8	Cable, 6 wires	25	ft	ACTUATOR-DC-POWER	HOLD	Lapp	HOLD
-9	Cable, 8 wires shielded, GN	50	ft	M1-RESOLVER, M2-RESOLVER	103xxxxx	Lapp	0036929
-10	Connector	24		+AJB-X1, +AJB-X1-MCP, +AJB-X2, +AJB-X2-MCP, +AJB-X3, +AJB-X4, +AJB-X4-MCP, +AJB-XEA, +AJB-XESD, +DP-X1, +DP-X2, +DP-X3, +DP-X4, +MCP-X1, +MCP-X2, +MCP-X4, +MCP-XEA, +MCP-XESD, +MCP/6Q1, +MCP/6Q2, +SIS-XESD, +SUPPLY-X230, +SUPPLY-X400			
-11	Wire, GNYE	25	ft	ACTUATOR-PE	HOLD	HOLD	HOLD
+2	Cable, 2 x 1 mm², BK	25	ft	ESD-STATUS	HOLD	Lapp	1030279
+3	Cable, 24 x 0.5 mm², BK	25	ft	ACTUATOR-ANALOG	HOLD	Lapp	13608
+4	Cable, 4 x 12 AWG shielded, BK	50	ft	M1-POWER, M2-POWER	10300516	LUTZE	A3311204
+5	Cable, 5 wires	25	ft	ACTUATOR-DISCRETE	HOLD	Lapp	HOLD
+6	Cable, 6 wires	25	ft	ACTUATOR-DC-POWER	HOLD	Lapp	HOLD
+7	Cable, 8 wires shielded, GN	50	ft	M1-RESOLVER, M2-RESOLVER	103xxxxx	Lapp	0036929
+8	Cable, By others, 2 wires	0	m	SUPPLY-230V			
+9	Cable, By others, 5 wires	0	m	SUPPLY-400V			
+10	Connector	18		+AJB-X1, +AJB-X1-MCP, +AJB-X2, +AJB-X2-MCP, +AJB-X3, +AJB-X4, +AJB-X4-MCP, +AJB-XEA, +AJB-XESD, +DP-X1, +DP-X2, +DP-X3, +DP-X4, +MCP-X1, +MCP-X2, +MCP-X4, +MCP-XEA, +MCP-XESD			
+11	Connector, By others	4		+SIS-XESD, +SUPPLY-X230, +SUPPLY-X400			
+12	Connector, Circuit breaker	2		+MCP/6Q1, +MCP/6Q2			
+13	Wire, GNYE	25	ft	ACTUATOR-PE	HOLD	HOLD	HOLD

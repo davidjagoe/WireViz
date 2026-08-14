@@ -2,22 +2,23 @@ connectors:
 
   # Customer
   +SIS-XESD:
-    pins: [xx, yy]
+    type: By others
+    pins: [+, -]
     show_pincount: false
-    notes: Details by others
+    notes: 48 VDC ESD Power
   
   +SUPPLY-X400:
+    type: By others
     pins: [L1, L2, L3, N, PE]
     show_pincount: false
-    notes: Details by others
-
 
   +SUPPLY-X230:
+    type: By others
     pins: [L, N]
     show_pincount: false
-    notes: Details by others
 
   +LOCAL-EARTH:
+    type: By others
     style: simple
     image:
       src: ./img/pe-symbol.png
@@ -27,14 +28,14 @@ connectors:
 
   # Main Control Panel
   +MCP/6Q1:
+    type: Circuit breaker
     pins: [1, 3, 5, N]
     show_pincount: false
-    notes: Circuit breaker
 
   +MCP/6Q2:
+    type: Circuit breaker
     pins: [1, 3]
     show_pincount: false
-    notes: Circuit breaker
 
   +MCP-XEA:
     pins: [1, 2]
@@ -207,7 +208,7 @@ cables:
     show_equiv: true
     length: 25 ft
     color: BK
-    colors: [BK, BK, BK, GNYE]
+    colors: [GNYE, BK, BK, BK]
     wirecount: 4
     shield: true
     pn: 10300516
@@ -239,29 +240,25 @@ cables:
     <<: *resolver
 
 # Customer provided cables
-  SIS-ESD:
-    wirecount: 2
-    notes: |
-      Supplied by others
-      Details by others
+  # SIS-ESD:
+  #   wirecount: 2
+  #   notes: |
+  #     Supplied by others
+  #     Details by others
 
   SUPPLY-400V:
+    type: By others
+    show_wirecount: false
     colors: [BKBN, BK, BKGY, LB, GNYE]
-    notes: |
-      Supplied by others
-      Details by others
     
   SUPPLY-230V:
+    type: By others
+    show_wirecount: false
     colors: [BN, LB]
-    notes:  |
-      Supplied by others
-      Details by others
 
   LOCAL-EARTH:
+    show_wirecount: false
     colors: [GNYE]
-    notes:  |
-      Supplied by others
-      Details by others
 
 
 connections:
@@ -318,17 +315,22 @@ connections:
 
   -
     - +AJB-XESD: [1L, 2L]
-    - SIS-ESD: [1, 2]
-    - +SIS-XESD: [xx, yy]
+    - --
+    - +SIS-XESD: [+, -]
+
+  # -
+  #   - +AJB-XESD: [1L, 2L]
+  #   - SIS-ESD: [1, 2]
+  #   - +SIS-XESD: [xx, yy]
 
   -
     - +DP-X1: [PE, 1, 2, 3, 4]
-    - M1-POWER: [4, 1, 2, 3, s]
+    - M1-POWER: [1, 2, 3, 4, s]
     - +AJB-X1: [PE, 1, 2, 3, 4]
 
   -
     - +DP-X2: [PE, 1, 2, 3, 4]
-    - M2-POWER: [4, 1, 2, 3, s]
+    - M2-POWER: [1, 2, 3, 4, s]
     - +AJB-X2: [PE, 1, 2, 3, 4]
 
   -
