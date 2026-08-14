@@ -1,11 +1,36 @@
 connectors:
 
+
+  # Util
+  # CONTACTS:
+  #   pins: [11, 14]
+  #   show_pincount: false
+
   # Customer
   +SIS-XESD:
     type: By others
     pins: [+, -]
     show_pincount: false
     notes: 48 VDC ESD Power
+  
+  +DCS-DISCRETE:
+    type: By others
+    pinlabels: [ESD Alarm +, ESD Alarm -, 
+                Auto Alarm +, Auto Alarm -, 
+                Trouble Alarm +, Trouble Alarm -,
+                Mode Bit 0 +, Mode Bit 0 -,
+                Mode Bit 1 +, Mode Bit 1 -,
+                Mode Bit 2 +, Mode Bit 2]
+    show_pincount: false
+  
+  +DCS-ANALOG:
+    type: By others
+    pinlabels: [ZC +, ZC -, SHIELD,
+                ZI +, ZC -, SHIELD,
+                PT ACC +, PT ACC -, SHIELD,
+                PT A +, PT A -, SHIELD,
+                PT B +, PT B -, SHIELD]
+    show_pincount: false
   
   +SUPPLY-X400:
     type: By others
@@ -59,8 +84,24 @@ connectors:
     show_pincount: false
     image:
       src: ./img/3-deck-analog-earthing.png
-      caption: 3-deck terminal block with shield to rail.
+      caption: 3-deck fuse terminal block with shield to rail.   
       width: 200
+
+  +MCP-X3:
+    pincount: 12
+    show_pincount: false
+
+  +MCP-X5(T1):
+    pins: [1U, 1M, 1L]
+    show_pincount: false
+    image:
+      src: ./img/3-deck-analog-earthing.png
+      caption: 3-deck fuse terminal block with shield to rail.
+      width: 200
+
+  +MCP-X5(T2-T5):
+    pins: [2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L]
+    show_pincount: false
 
   # Drive Panel
   +DP-X1: &dp-x1
@@ -240,11 +281,6 @@ cables:
     <<: *resolver
 
 # Customer provided cables
-  # SIS-ESD:
-  #   wirecount: 2
-  #   notes: |
-  #     Supplied by others
-  #     Details by others
 
   SUPPLY-400V:
     type: By others
@@ -260,8 +296,52 @@ cables:
     show_wirecount: false
     colors: [GNYE]
 
+  # DCS-DISCRETE:
+  #   show_wirecount: false
+    
+  DCS-ANALOG:
+    type: By others
+    show_wirecount: false
+    colors: [BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR]
+    wirelabels: [1(BK), 1(WH), SHIELD (PAIR 1), 2(BK), 2(WH), SHIELD (PAIR 2), 3(BK), 3(WH), SHIELD (PAIR 3), 4(BK), 4(WH), SHIELD (PAIR 4), 5(BK), 5(WH), SHIELD (PAIR 5)]
+    inner_shields: [SHIELD (PAIR 1), SHIELD (PAIR 2), SHIELD (PAIR 3), SHIELD (PAIR 4), SHIELD (PAIR 5)]
+    show_wirenumbers: false
+
 
 connections:
+
+  # DCS DISCRETE CONNECTIONS
+  -
+    - +DCS-DISCRETE: [1-12]
+    - --
+    - +MCP-X3: [1-12]
+
+  # Could MCP show contacts on the drawing like this
+  # (See CONTACTS above, which would include schem image of contacts
+  # -
+  #   - +MCP-X3: [1, 2]
+  #   - --
+  #   - CONTACTS.25K3: [11, 14]
+
+  # -
+  #   - +MCP-X3: [3, 4]
+  #   - --
+  #   - CONTACTS.25K4: [11, 14]
+
+  -
+    - +DCS-ANALOG: [1-3]
+    - DCS-ANALOG: [1-3]
+    - +MCP-X5(T1): [1U, 1M, 1L]
+
+  -
+    - +DCS-ANALOG: [4-15]
+    - DCS-ANALOG: [4-15]
+    - +MCP-X5(T2-T5): [2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L]
+
+  -
+    - +AJB-XESD: [1L, 2L]
+    - --
+    - +SIS-XESD: [+, -]
 
   -
     - +SUPPLY-X400: [L1, L2, L3, N]
@@ -312,16 +392,6 @@ connections:
     - +MCP-XESD: [1, 2]
     - ESD-STATUS: [1, 2]
     - +AJB-XESD: [1L, 2L]
-
-  -
-    - +AJB-XESD: [1L, 2L]
-    - --
-    - +SIS-XESD: [+, -]
-
-  # -
-  #   - +AJB-XESD: [1L, 2L]
-  #   - SIS-ESD: [1, 2]
-  #   - +SIS-XESD: [xx, yy]
 
   -
     - +DP-X1: [PE, 1, 2, 3, 4]
