@@ -13,7 +13,7 @@ connectors:
     show_pincount: false
     notes: |
       Modbus RTU, RS485
-      Ground at DCS end
+      Shield ground at DCS end
 
   +SIS-XESD:
     type: By others
@@ -356,16 +356,6 @@ cables:
 connections:
 
 
-  -
-    - +DCS-MODBUS: [D1, D0, COM, SHIELD]
-    - DCS-MODBUS: [1-3, s]
-    - +MCP-X6: [1-4]
-
-  -
-    - +DCS-DISCRETE: [1-12]
-    - DCS-DISCRETE: [1-12]
-    - +MCP-X3: [1-12]
-
   # Could MCP show contacts on the drawing like this
   # (See CONTACTS above, which would include schem image of contacts
   # -
@@ -379,49 +369,29 @@ connections:
   #   - CONTACTS.25K4: [11, 14]
 
   -
-    - +DCS-ANALOG: [1-3]
-    - DCS-ANALOG: [1-3]
-    - +MCP-X5(T1): [1U, 1M, 1L]
+    - +DP-X4: [1-9]
+    - M2-RESOLVER: [1-8, s]
+    - +AJB-X4: [1-9]
 
   -
-    - +DCS-ANALOG: [4-15]
-    - DCS-ANALOG: [4-15]
-    - +MCP-X5(T2-T5): [2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L]
+    - +DP-X3: [1-9]
+    - M1-RESOLVER: [1-8, s]
+    - +AJB-X3: [1-9]
 
   -
-    - +AJB-XESD: [1L, 2L]
-    - SIS-ESD: [1, 2]
-    - +SIS-XESD: [+, -]
+    - +DP-X2: [PE, 1, 2, 3, 4]
+    - M2-POWER: [1, 2, 3, 4, s]
+    - +AJB-X2: [PE, 1, 2, 3, 4]
 
   -
-    - +SUPPLY-X400: [L1, L2, L3, N]
-    - SUPPLY-400V: [1-4]
-    - +MCP/6Q1: [1, 3, 5, N]
+    - +DP-X1: [PE, 1, 2, 3, 4]
+    - M1-POWER: [1, 2, 3, 4, s]
+    - +AJB-X1: [PE, 1, 2, 3, 4]
 
   -
-    - +SUPPLY-X400: [PE]
-    - SUPPLY-400V: [5]
-    - +MCP-XEA: [1]
-
-  -
-    - +SUPPLY-X230: [L, N]
-    - SUPPLY-230V: [1, 2]
-    - +MCP/6Q2: [1, 3]
-
-  -
-    - +LOCAL-EARTH: [1]
-    - LOCAL-EARTH: [1]
-    - +MCP-XEA: [2]
-
-  -
-    - +MCP-X1: [PE]
-    - ACTUATOR-PE: [1]
-    - +AJB-XEA: [PE]
-
-  -
-    - +MCP-X1: [2-6]
-    - ACTUATOR-DC-POWER: [1-5]
-    - +AJB-X1-MCP: [2L, 3U, 4U, 5U, 6U]
+    - +MCP-X4: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L]
+    - ACTUATOR-ANALOG: [1-21]
+    - +AJB-X4-MCP: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L]
 
   -
     - +MCP-X2: [2-6]
@@ -434,9 +404,14 @@ connections:
     - +AJB-X2-MCP: [1U]
 
   -
-    - +MCP-X4: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L]
-    - ACTUATOR-ANALOG: [1-21]
-    - +AJB-X4-MCP: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L]
+    - +MCP-X1: [PE]
+    - ACTUATOR-PE: [1]
+    - +AJB-XEA: [PE]
+
+  -
+    - +MCP-X1: [2-6]
+    - ACTUATOR-DC-POWER: [1-5]
+    - +AJB-X1-MCP: [2L, 3U, 4U, 5U, 6U]
 
   -
     - +MCP-XESD: [1, 2]
@@ -444,21 +419,71 @@ connections:
     - +AJB-XESD: [1L, 2L]
 
   -
-    - +DP-X1: [PE, 1, 2, 3, 4]
-    - M1-POWER: [1, 2, 3, 4, s]
-    - +AJB-X1: [PE, 1, 2, 3, 4]
+    - +AJB-XESD: [1L, 2L]
+    - SIS-ESD: [1, 2]
+    - +SIS-XESD: [+, -]
 
   -
-    - +DP-X2: [PE, 1, 2, 3, 4]
-    - M2-POWER: [1, 2, 3, 4, s]
-    - +AJB-X2: [PE, 1, 2, 3, 4]
+    - +DCS-MODBUS: [D1, D0, COM, SHIELD]
+    - DCS-MODBUS: [1-3, s]
+    - +MCP-X6: [1-4]
 
   -
-    - +DP-X3: [1-9]
-    - M1-RESOLVER: [1-8, s]
-    - +AJB-X3: [1-9]
+    - +DCS-ANALOG: [1-3]
+    - DCS-ANALOG: [1-3]
+    - +MCP-X5(T1): [1U, 1M, 1L]
 
   -
-    - +DP-X4: [1-9]
-    - M2-RESOLVER: [1-8, s]
-    - +AJB-X4: [1-9]
+    - +DCS-ANALOG: [4-15]
+    - DCS-ANALOG: [4-15]
+    - +MCP-X5(T2-T5): [2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L]
+
+  -
+    - +DCS-DISCRETE: [1-12]
+    - DCS-DISCRETE: [1-12]
+    - +MCP-X3: [1-12]
+
+  -
+    - +SUPPLY-X230: [L, N]
+    - SUPPLY-230V: [1, 2]
+    - +MCP/6Q2: [1, 3]
+
+  -
+    - +LOCAL-EARTH: [1]
+    - LOCAL-EARTH: [1]
+    - +MCP-XEA: [2]
+
+  -
+    - +SUPPLY-X400: [L1, L2, L3, N]
+    - SUPPLY-400V: [1-4]
+    - +MCP/6Q1: [1, 3, 5, N]
+
+  -
+    - +SUPPLY-X400: [PE]
+    - SUPPLY-400V: [5]
+    - +MCP-XEA: [1]
+
+tweak:
+  append:
+    - 'pack=100;'
+    - 'packmode="array_cu1";'
+
+    # - '"+DP-X4" [sortv=1];'
+    # - '"+DP-X3" [sortv=2];'
+    # - '"+DP-X2" [sortv=3];'
+    # - '"+DP-X1" [sortv=4];'
+
+    # - '"+MCP-X4" [sortv=5];'
+    # - '"+MCP-X2" [sortv=6];'
+    # - '"+MCP-X1" [sortv=7];'
+    # - '"+MCP-XESD" [sortv=8];'
+    # - '"+AJB-XESD" [sortv=8];' # same graphviz element
+
+    # Fiber connection here
+
+    # - '"+DCS-MODBUS" [sortv=10];'
+    # - '"+DCS-ANALOG" [sortv=11];'
+    # - '"+DCS-DISCRETE" [sortv=12];'
+    # - '"+SUPPLY-X230" [sortv=13];'
+    # - '"+LOCAL-EARTH" [sortv=14];'
+    # - '"+SUPPLY-X400" [sortv=15];'
