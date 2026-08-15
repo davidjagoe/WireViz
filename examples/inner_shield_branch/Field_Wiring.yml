@@ -7,6 +7,14 @@ connectors:
   #   show_pincount: false
 
   # Customer
+  +DCS-MODBUS:
+    type: By others
+    pins: [D1, D0, COM, SHIELD]
+    show_pincount: false
+    notes: |
+      Modbus RTU, RS485
+      Ground at DCS end
+
   +SIS-XESD:
     type: By others
     pins: [+, -]
@@ -111,6 +119,10 @@ connectors:
       src: ./img/3-deck-knife.png
       caption: 3-deck knife disconnect terminal block with shield to rail.
       width: 200
+
+  +MCP-X6:
+    pincount: 6
+    show_pincount: false
 
   # Drive Panel
   +DP-X1: &dp-x1
@@ -327,10 +339,28 @@ cables:
     color_code: BW
     show_wirenumbers: false
 
+  DCS-MODBUS:
+    type: By others
+    show_wirecount: false
+    wirecount: 3
+    #color_code: BW
+    show_wirenumbers: false
+    color_code: DIN
+    shield: true
+    notes: |
+      Lapp UNITRONIC Li2YCYv (TP) 
+      P/N 0031355 or equivalent
+    
+
 
 connections:
 
-  # DCS DISCRETE CONNECTIONS
+
+  -
+    - +DCS-MODBUS: [D1, D0, COM, SHIELD]
+    - DCS-MODBUS: [1-3, s]
+    - +MCP-X6: [1-4]
+
   -
     - +DCS-DISCRETE: [1-12]
     - DCS-DISCRETE: [1-12]
