@@ -33,7 +33,8 @@ connectors:
   
   +DCS-ANALOG:
     type: By others
-    pinlabels: [ZC +, ZC -, SHIELD,
+    pinlabels: [ #SHIELD, 
+                ZC +, ZC -, SHIELD,
                 ZI +, ZC -, SHIELD,
                 PT ACC +, PT ACC -, SHIELD,
                 PT A +, PT A -, SHIELD,
@@ -88,7 +89,7 @@ connectors:
     show_pincount: false
 
   +MCP-X4: &field-analog-terminals
-    pins: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L]
+    pins: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L, SHIELD]
     show_pincount: false
     image:
       src: ./img/3-deck-analog-earthing.png
@@ -207,6 +208,7 @@ cables:
     category: bundle
     length: 25 ft
     wirecount: 1
+    show_wirecount: false
     colors: [GNYE]
     pn: HOLD
     manufacturer: HOLD
@@ -220,6 +222,7 @@ cables:
     # color: BK
     color_code: DIN
     wirecount: 5
+    show_wirecount: false
     pn: HOLD
     manufacturer: Lapp
     mpn: HOLD
@@ -232,6 +235,7 @@ cables:
     # color: BK
     color_code: DIN
     wirecount: 6
+    show_wirecount: false
     pn: HOLD
     manufacturer: Lapp
     mpn: HOLD
@@ -240,18 +244,21 @@ cables:
   ACTUATOR-ANALOG:
     gauge: 0.5
     show_equiv: true
+    shield: true
     length: 25 ft
     color: BK
-    colors: [BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR]
-    wirelabels: [1(BK), 1(WH), SHIELD (PAIR 1), 2(BK), 2(WH), SHIELD (PAIR 2), 3(BK), 3(WH), SHIELD (PAIR 3), 4(BK), 4(WH), SHIELD (PAIR 4), 5(BK), 5(WH), SHIELD (PAIR 5), 6(BK), 6(WH), SHIELD (PAIR 6), 7(BK), 7(WH), SHIELD (PAIR 7), 8(BK), 8(WH), SHIELD (PAIR 8)]
+    colors: [BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, OG]
+    wirelabels: [1(BK), 1(WH), SHIELD (PAIR 1), 2(BK), 2(WH), SHIELD (PAIR 2), 3(BK), 3(WH), SHIELD (PAIR 3), 4(BK), 4(WH), SHIELD (PAIR 4), 5(BK), 5(WH), SHIELD (PAIR 5), 6(BK), 6(WH), SHIELD (PAIR 6), 7(BK), 7(WH), SHIELD (PAIR 7), 8(BK), 8(WH), SHIELD (PAIR 8), SPARE]
     inner_shields: [SHIELD (PAIR 1), SHIELD (PAIR 2), SHIELD (PAIR 3), SHIELD (PAIR 4), SHIELD (PAIR 5), SHIELD (PAIR 6), SHIELD (PAIR 7), SHIELD (PAIR 8)]
     show_wirenumbers: false
+    show_wirecount: false
     pn: HOLD
     manufacturer: Lapp
-    mpn: 0032450
+    mpn: "0032450"
     notes: |
       O.D. 0.567 in
-      Pair 8 unused. Coil and insulate at both ends.
+      Pair 8 and OG core unused.
+      Coil, mark, and insulate at both ends.
 
   ESD-STATUS:
     gauge: 1
@@ -260,6 +267,7 @@ cables:
     color: BK
     color_code: DIN
     wirecount: 2
+    show_wirecount: false
     pn: HOLD
     manufacturer: Lapp
     mpn: 1030279
@@ -272,6 +280,7 @@ cables:
     color: BK
     colors: [GNYE, BK, BK, BK]
     wirecount: 4
+    show_wirecount: false
     shield: true
     pn: 10300516
     manufacturer: LUTZE
@@ -287,10 +296,11 @@ cables:
     colors: [WH, BN, SR, GN, YE, SR, PK, GY]
     wirelabels: [PR1(A+), PR1(A-), SHIELD (PAIR 1), PR2(B+), PR2(B-), SHIELD (PAIR 2), V+, V-]
     inner_shields: [SHIELD (PAIR 1), SHIELD (PAIR 2)]
+    show_wirecount: false
     shield: true
     pn: 103xxxxx
     manufacturer: Lapp
-    mpn: 0036929
+    mpn: "0036929"
     show_wirecount: false
     show_wirenumbers: false
     notes: |
@@ -319,6 +329,7 @@ cables:
 
   DCS-ANALOG:
     type: By others
+    shield: true
     show_wirecount: false
     colors: [BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR]
     wirelabels: [1(BK), 1(WH), SHIELD (PAIR 1), 2(BK), 2(WH), SHIELD (PAIR 2), 3(BK), 3(WH), SHIELD (PAIR 3), 4(BK), 4(WH), SHIELD (PAIR 4), 5(BK), 5(WH), SHIELD (PAIR 5)]
@@ -389,9 +400,9 @@ connections:
     - +AJB-X1: [PE, 1, 2, 3, 4]
 
   -
-    - +MCP-X4: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L]
-    - ACTUATOR-ANALOG: [1-21]
-    - +AJB-X4-MCP: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L]
+    - +MCP-X4: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L, SHIELD]
+    - ACTUATOR-ANALOG: [1-21, s]
+    - +AJB-X4-MCP: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L, SHIELD]
 
   -
     - +MCP-X2: [2-6]

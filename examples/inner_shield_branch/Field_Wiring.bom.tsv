@@ -1,13 +1,13 @@
 Id	Description	Qty	Unit	Designators	P/N	Manufacturer	MPN
 1	Cable, 1 wires	0	m	LOCAL-EARTH			
 2	Cable, 2 x 1 mm², BK	25	ft	ESD-STATUS	HOLD	Lapp	1030279
-3	Cable, 24 x 0.5 mm², BK	25	ft	ACTUATOR-ANALOG	HOLD	Lapp	13608
+3	Cable, 25 x 0.5 mm² shielded, BK	25	ft	ACTUATOR-ANALOG	HOLD	Lapp	0032450
 4	Cable, 4 x 12 AWG shielded, BK	50	ft	M1-POWER, M2-POWER	10300516	LUTZE	A3311204
 5	Cable, 5 wires	25	ft	ACTUATOR-DISCRETE	HOLD	Lapp	HOLD
 6	Cable, 6 wires	25	ft	ACTUATOR-DC-POWER	HOLD	Lapp	HOLD
 7	Cable, 8 wires shielded, GN	50	ft	M1-RESOLVER, M2-RESOLVER	103xxxxx	Lapp	0036929
 8	Cable, By others, 12 wires	0	m	DCS-DISCRETE			
-9	Cable, By others, 15 wires	0	m	DCS-ANALOG			
+9	Cable, By others, 15 wires shielded	0	m	DCS-ANALOG			
 10	Cable, By others, 2 wires	0	m	SIS-ESD, SUPPLY-230V			
 11	Cable, By others, 3 wires shielded	0	m	DCS-MODBUS			
 12	Cable, By others, 5 wires	0	m	SUPPLY-400V			
