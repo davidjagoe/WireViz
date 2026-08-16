@@ -1,5 +1,5 @@
-connectors:
 
+connectors:
 
   # Util
   # CONTACTS:
@@ -478,8 +478,14 @@ tweak:
   append:
     - 'pack=100;'
     - 'packmode="array_cu1";'
-    - 'page="11.69,8.27";'   # A4 landscape, inches
-    - 'margin="0.4";'
+    # - 'size="17,11";'
+    #- 'rotate=90;'
+    # - 'center=true;'
+    - 'page="17,11";'
+    - 'margin="0.5";'
+    - 'size="16,1000";'   # 17 − (2 × 0.5); height deliberately unreachable
+
+
 
     # - '"+DP-X4" [sortv=1];'
     # - '"+DP-X3" [sortv=2];'
