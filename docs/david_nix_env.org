@@ -29,5 +29,18 @@
 
 
 * How to run wireviz in nix env
-  - $ nix develop nixpkgs#wireviz
+  - nix develop nixpkgs#wireviz
   - PYTHONPATH="$PYTHONPATH:$PWD/src" python -m wireviz.wv_cli examples/inner_shield_branch/Field_Wiring.yml
+
+
+
+* If creating the gv file and post-processing
+
+  The tweak section in the Field_Wiring.yml file sets packing, spacing
+  and pagination. The last requires outputting the gv and then using
+  dot which requires ghostscript command in the env, so this is
+  required:
+
+  - nix shell nixpkgs#ghostscript --command nix develop nixpkgs#wireviz
+  - PYTHONPATH="$PYTHONPATH:$PWD/src" python -m wireviz.wv_cli -f g examples/inner_shield_branch/Field_Wiring.yml
+  - dot -Tps2 -o harness.ps Field_Wiring.gv && ps2pdf harness.ps harness.pdf
