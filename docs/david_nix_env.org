@@ -44,3 +44,12 @@
   - nix shell nixpkgs#ghostscript --command nix develop nixpkgs#wireviz
   - PYTHONPATH="$PYTHONPATH:$PWD/src" python -m wireviz.wv_cli -f g examples/inner_shield_branch/Field_Wiring.yml
   - dot -Tps2 -o harness.ps Field_Wiring.gv && ps2pdf harness.ps harness.pdf
+
+* More stuff to split into multiple pdfs
+
+  - nix shell nixpkgs#ghostscript --command nix develop nixpkgs#wireviz
+  - PYTHONPATH="$PYTHONPATH:$PWD/src" python -m wireviz.wv_cli -f g examples/inner_shield_branch/Field_Wiring.yml
+  - ccomps -x -o examples/inner_shield_branch/build/sheet.gv examples/inner_shield_branch/Field_Wiring.gv
+  - python run.py # dot command creating the ps files
+  - gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dDEVICEWIDTHPOINTS=1224 -dDEVICEHEIGHTPOINTS=792 -dFIXEDMEDIA -sOutputFile=examples/inner_shield_branch/field_wiring.pdf examples/inner_shield_branch/build/sheet*.ps
+  - gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=examples/inner_shield_branch/field_wiring.pdf examples/inner_shield_branch/build/sheet*.ps

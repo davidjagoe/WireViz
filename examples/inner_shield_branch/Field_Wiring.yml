@@ -479,11 +479,11 @@ tweak:
     - 'pack=100;'
     - 'packmode="array_cu1";'
     # - 'size="17,11";'
-    #- 'rotate=90;'
+    # - 'rotate=90;'
     # - 'center=true;'
-    - 'page="17,11";'
-    - 'margin="0.5";'
-    - 'size="16,1000";'   # 17 − (2 × 0.5); height deliberately unreachable
+    # - 'page="17,11";'
+    # - 'margin="0.5";'
+    # - 'size="8,5";'   # 17 − (2 × 0.5); height deliberately unreachable
 
 
 
