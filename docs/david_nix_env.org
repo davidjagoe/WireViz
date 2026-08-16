@@ -1,0 +1,33 @@
+
+
+
+* Setup
+
+  - This is flake.nix
+
+#+BEGIN_SRC
+                wireviz = pkgs.wireviz.overrideAttrs (old: {
+                  # src = pkgs.fetchgit {
+                  #   url = "file:///home/sjagoe/workspace/other/WireViz";
+                  #   rev = "v0.4.1";
+                  #   hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+                  # };
+
+                  src = pkgs.fetchFromGitHub {
+                    owner = "davidjagoe";
+                    repo = "WireViz";
+                    rev = "refs/heads/master";
+                    # When changing code, set hash to to force
+                    # rebuild. The nix store is content addressed, so
+                    # having an old hash will rebuild the old code
+                    # despite a branch change/update.
+                    # hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+                    hash = "sha256-2topgXsrhB1+S7EbZP/p+hsJMeSINGaTM8qdSilGuCI=";
+                  };
+                });
+#+END_SRC
+
+
+* How to run wireviz in nix env
+  - $ nix develop nixpkgs#wireviz
+  - PYTHONPATH="$PYTHONPATH:$PWD/src" python -m wireviz.wv_cli examples/inner_shield_branch/Field_Wiring.yml

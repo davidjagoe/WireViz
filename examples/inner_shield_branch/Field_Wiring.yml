@@ -478,6 +478,8 @@ tweak:
   append:
     - 'pack=100;'
     - 'packmode="array_cu1";'
+    - 'page="11.69,8.27";'   # A4 landscape, inches
+    - 'margin="0.4";'
 
     # - '"+DP-X4" [sortv=1];'
     # - '"+DP-X3" [sortv=2];'
