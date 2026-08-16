@@ -1,0 +1,56 @@
+
+* NIX Setup
+
+  - Add wireviz from nixpks. Even though we will run the python
+    directly, we need that to pull in deps for the nix develop
+    command.
+
+# hold on this - i'm just running wireviz via python in develop shell in my git repo.
+#   - Also, add this is flake.nix so that we get my patched version.
+
+# #+BEGIN_SRC
+#                 wireviz = pkgs.wireviz.overrideAttrs (old: {
+#                   src = pkgs.fetchFromGitHub {
+#                     owner = "davidjagoe";
+#                     repo = "WireViz";
+#                     rev = "refs/heads/master";
+#                     # When changing code, set hash to to force
+#                     # rebuild. The nix store is content addressed, so
+#                     # having an old hash will rebuild the old code
+#                     # despite a branch change/update.
+#                     # hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+#                     hash = "sha256-2topgXsrhB1+S7EbZP/p+hsJMeSINGaTM8qdSilGuCI=";
+#                   };
+#                 });
+# #+END_SRC
+
+
+* How to run wireviz in nix env
+  If just running wireviz from repo, just need to enter develop shell
+  and then run python script.
+
+  - nix develop nixpkgs#wireviz
+  - PYTHONPATH="$PYTHONPATH:$PWD/src" python -m wireviz.wv_cli examples/inner_shield_branch/Field_Wiring.yml
+
+
+* If creating the gv file and post-processing
+
+  Unfortunately, pagination etc is more complicated and requires
+  running ccomps, dot and gs. These are not available in the dev shell
+  by itself so need to enter the shell like this.
+
+  - nix shell nixpkgs#ghostscript --command nix develop nixpkgs#wireviz
+
+  Which for example now allows you to run dot with -Tps
+
+  - PYTHONPATH="$PYTHONPATH:$PWD/src" python -m wireviz.wv_cli -f g examples/inner_shield_branch/Field_Wiring.yml
+  - dot -Tps -o harness.ps Field_Wiring.gv && ps2pdf harness.ps harness.pdf
+
+* Random notes used during development of build script
+
+  - nix shell nixpkgs#ghostscript --command nix develop nixpkgs#wireviz
+  - PYTHONPATH="$PYTHONPATH:$PWD/src" python -m wireviz.wv_cli -f g examples/inner_shield_branch/Field_Wiring.yml
+  - ccomps -x -o examples/inner_shield_branch/build/sheet.gv examples/inner_shield_branch/Field_Wiring.gv
+  - python run.py # dot command creating the ps files
+  - gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dDEVICEWIDTHPOINTS=1224 -dDEVICEHEIGHTPOINTS=792 -dFIXEDMEDIA -sOutputFile=examples/inner_shield_branch/field_wiring.pdf examples/inner_shield_branch/build/sheet*.ps
+  - gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -sOutputFile=examples/inner_shield_branch/field_wiring.pdf examples/inner_shield_branch/build/sheet*.ps
