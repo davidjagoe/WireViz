@@ -7,9 +7,6 @@
 
 BUILD_DIR=$(mktemp -d)
 
-# mkdir "$BUILD_DIR/gv_sheets"
-
-# pushd ../../
 
 # Run wireviz on the YAML file to produce the monolithic graphviz "gv" file (containing entire field wiring)
 PYTHONPATH="$PYTHONPATH:$PWD/src" python -m wireviz.wv_cli -o "$BUILD_DIR" -f g field_wiring/Field_Wiring.yml
@@ -23,6 +20,7 @@ for gv_file in "$BUILD_DIR/"*.gv
 do
 
     # For each xyz.gv file will create xyz.gv.ps alongside, one for each sheet as specified
+    # A3 output
     dot -O -Tps -Gpage=16.5433,11.6933 -Gmargin=0.5 -Gsize=16,10 -Gcenter=true "$gv_file"
 
     # For 11x17 print
@@ -37,4 +35,3 @@ gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dDEVICEWIDTHPOINTS=1224 -dDEVICEHEIGHTPO
 echo "$BUILD_DIR"
 rm -rf "$BUILD_DIR"
 
-# popd
