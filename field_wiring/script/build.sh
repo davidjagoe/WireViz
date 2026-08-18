@@ -3,6 +3,12 @@
 
 # NOTE: currently assumes this script is run from the root of the
 # WireViz repo, and hard-codes where the yml file lives
+
+# TODO:
+# - Pass in path of source files
+# - Remove hardcoding of field_wiring/ path
+# - Order of connectors & sheets based on gv filename sequence
+# - Template the titleblock for sheet number
 #
 
 BUILD_DIR=$(mktemp -d)
@@ -19,25 +25,19 @@ ccomps -x -o "$BUILD_DIR/sheet.gv" "$BUILD_DIR/Field_Wiring.gv"
 for gv_file in "$BUILD_DIR/"*.gv
 do
 
-    # For each xyz.gv file will create xyz.gv.ps alongside, one for each sheet as specified
-    dot -O -Tps -Gpage=17,11 -Gmargin=0.5 -Gsize=8,5 -Gcenter=true "$gv_file"
-    # dot -O -Tps -Gpage=17,11 -Gmargin=0.5 -Gsize=16,10 -Gcenter=true "$gv_file"
-
-
-    # A3 page size
-    # dot -O -Tps -Gpage=16.5433,11.6933 -Gmargin=0.5 -Gsize=16,10 -Gcenter=true "$gv_file"
+    # For each xyz.gv, next command creates xyz.gv.ps alongside, one for each sheet.
+    dot -O -Tps -Gpage=17,11 -Gmargin=0.5 -Gsize=12,7.5 -Gcenter=true "$gv_file"
 done
 
+
+# See https://web.mit.edu/ghostscript/src/ghostscript-8.14/doc/Use.htm#Known_paper_sizes
 
 # Create the A3 PDF
 gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dDEVICEWIDTHPOINTS=1190 -dDEVICEHEIGHTPOINTS=842 -dFIXEDMEDIA \
    -sOutputFile=field_wiring/field_wiring.pdf "$BUILD_DIR/"*.ps
 
-# 11x17: -dDEVICEWIDTHPOINTS=1224 -dDEVICEHEIGHTPOINTS=792
 
 # Overlay the titleblock on the created PDF.
-
-
 qpdf field_wiring/field_wiring.pdf --overlay field_wiring/Titleblock.pdf --repeat=1 -- field_wiring/field_wiring_with_titleblock.pdf
 
 
