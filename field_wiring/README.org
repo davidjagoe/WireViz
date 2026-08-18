@@ -32,6 +32,9 @@
   - nix develop nixpkgs#wireviz
   - PYTHONPATH="$PYTHONPATH:$PWD/src" python -m wireviz.wv_cli examples/inner_shield_branch/Field_Wiring.yml
 
+* See scripts/
+  For 2275 panel wiring project, use the script.
+
 
 * If creating the gv file and post-processing
 

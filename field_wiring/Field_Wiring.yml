@@ -478,27 +478,19 @@ tweak:
   append:
     - 'pack=100;'
     - 'packmode="array_cu1";'
-    # - 'size="17,11";'
-    # - 'rotate=90;'
-    # - 'center=true;'
-    # - 'page="17,11";'
-    # - 'margin="0.5";'
-    # - 'size="8,5";'   # 17 − (2 × 0.5); height deliberately unreachable
-
-
 
     # - '"+DP-X4" [sortv=1];'
     # - '"+DP-X3" [sortv=2];'
-    # - '"+DP-X2" [sortv=3];'
-    # - '"+DP-X1" [sortv=4];'
+    # - '"+DP-X1" [sortv=3];'
+    # - '"+DP-X2" [sortv=4];'
 
     # - '"+MCP-X4" [sortv=5];'
     # - '"+MCP-X2" [sortv=6];'
     # - '"+MCP-X1" [sortv=7];'
     # - '"+MCP-XESD" [sortv=8];'
-    # - '"+AJB-XESD" [sortv=8];' # same graphviz element
+    # # - '"+AJB-XESD" [sortv=8];' # same graphviz element
 
-    # Fiber connection here
+    # # Fiber connection here
 
     # - '"+DCS-MODBUS" [sortv=10];'
     # - '"+DCS-ANALOG" [sortv=11];'
