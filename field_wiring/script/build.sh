@@ -20,18 +20,26 @@ for gv_file in "$BUILD_DIR/"*.gv
 do
 
     # For each xyz.gv file will create xyz.gv.ps alongside, one for each sheet as specified
-    # A3 output
-    dot -O -Tps -Gpage=16.5433,11.6933 -Gmargin=0.5 -Gsize=16,10 -Gcenter=true "$gv_file"
-
-    # For 11x17 print
+    dot -O -Tps -Gpage=17,11 -Gmargin=0.5 -Gsize=8,5 -Gcenter=true "$gv_file"
     # dot -O -Tps -Gpage=17,11 -Gmargin=0.5 -Gsize=16,10 -Gcenter=true "$gv_file"
+
+
+    # A3 page size
+    # dot -O -Tps -Gpage=16.5433,11.6933 -Gmargin=0.5 -Gsize=16,10 -Gcenter=true "$gv_file"
 done
 
 
-gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dDEVICEWIDTHPOINTS=1224 -dDEVICEHEIGHTPOINTS=792 -dFIXEDMEDIA \
+# Create the A3 PDF
+gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dDEVICEWIDTHPOINTS=1190 -dDEVICEHEIGHTPOINTS=842 -dFIXEDMEDIA \
    -sOutputFile=field_wiring/field_wiring.pdf "$BUILD_DIR/"*.ps
 
+# 11x17: -dDEVICEWIDTHPOINTS=1224 -dDEVICEHEIGHTPOINTS=792
 
-echo "$BUILD_DIR"
+# Overlay the titleblock on the created PDF.
+
+
+qpdf field_wiring/field_wiring.pdf --overlay field_wiring/Titleblock.pdf --repeat=1 -- field_wiring/field_wiring_with_titleblock.pdf
+
+
+# echo "$BUILD_DIR"
 rm -rf "$BUILD_DIR"
-
