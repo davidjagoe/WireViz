@@ -1,4 +1,9 @@
-# files = glob.glob('examples/inner_shield_branch/build/sheet*.gv')
+#!/usr/bin/env zsh
+
+
+# Enter nix shell with dependencies
+
+# $ nix shell nixpkgs#ghostscript --command nix develop nixpkgs#wireviz
 
 
 # NOTE: currently assumes this script is run from the root of the
@@ -29,31 +34,39 @@ dot -Tdot "$BUILD_DIR/Field_Wiring.gv" > "$BUILD_DIR/Field_Wiring__positioned.gv
 # specified
 ccomps -x -o "$SHEETS_DIR/sheet.gv" "$BUILD_DIR/Field_Wiring__positioned.gv"
 
+
 for gv_file in "$SHEETS_DIR"/*.gv
 do
 
     # For each xyz.gv, next command creates xyz.gv.ps alongside, one
     # for each sheet.  Note, neato here is used only because it allows
     # the -n2 flag which uses the positions locked when doing original
-    # dot layout on the whole monolithic GV file. I had a case where
-    # joined connectors were being flipped when re-laying out
-    # individual files from ccomp.
+    # dot layout on the whole monolithic GV file. We are not using the
+    # 'neato' layout algorithm, dot was used above for layout. (I had a
+    # case where joined connectors were being flipped when re-laying
+    # out individual files from ccomp.)
 
 
     # page and size options are for bounding/scaling to prevent tiling
     # in the next step.
+
     neato -O -n2 -Tps -Gpage=17,11 -Gmargin=0.5 -Gsize=12,7.5 -Gcenter=true "$gv_file"
 
 
 done
 
 
+# We will use zsh's handy glob qualifier to numerically order the
+# postscript files, since ccomps is rather rude in this regard.
+
+ps_files=("$SHEETS_DIR"/*.ps)
+
 # This is where we finally create PDF from postscript files. Page size is set here.
 # See https://web.mit.edu/ghostscript/src/ghostscript-8.14/doc/Use.htm#Known_paper_sizes
 
 # Create the A3 PDF
 gs -dNOPAUSE -dBATCH -sDEVICE=pdfwrite -dDEVICEWIDTHPOINTS=1190 -dDEVICEHEIGHTPOINTS=842 -dFIXEDMEDIA \
-   -sOutputFile=field_wiring/field_wiring.pdf "$SHEETS_DIR"/*.ps
+   -sOutputFile=field_wiring/field_wiring.pdf "${(n)ps_files[@]}"
 
 
 # Overlay the titleblock on the created PDF.
