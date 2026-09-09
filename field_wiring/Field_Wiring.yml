@@ -9,7 +9,7 @@ connectors:
   # Customer
   +DCS-MODBUS:
     type: By others
-    pins: [D1, D0, COM, SHIELD]
+    pins: [D1, D0, COM, SPARE, SHIELD]
     show_pincount: false
     notes: |
       Modbus RTU, RS485
@@ -17,7 +17,7 @@ connectors:
 
   +SIS-XESD:
     type: By others
-    pins: [+, -]
+    pins: [+, -, PE]
     show_pincount: false
     notes: 48 VDC ESD Power
   
@@ -122,7 +122,7 @@ connectors:
       width: 200
 
   +MCP-X6:
-    pincount: 6
+    pincount: 5
     show_pincount: false
 
   # Drive Panel
@@ -197,7 +197,7 @@ connectors:
     <<: *dp-x4
 
   +AJB-XESD:
-    pins: [1L, 1U, 2L, 2U]
+    pins: [1L, 1U, 2L, 2U, 3L, 3U]
     show_pincount: false
     notes: Upper terminals for solenoid connections.
 
@@ -263,13 +263,12 @@ cables:
     show_equiv: true
     length: 25 ft
     color: BK
-    color_code: DIN
-    wirecount: 2
+    colors: [BK, WH]
     show_wirecount: false
-    pn: HOLD
-    manufacturer: Lapp
+    manufacturer: Lynxeo
     mpn: 1030279
-    notes: O.D. 0.22 in
+    notes: |
+      EN 50288-7 XLPE OS Armoured 1x2x1
 
   M1-POWER: &motor_power
     gauge: 4
@@ -341,17 +340,22 @@ cables:
     show_wirenumbers: false
 
   SIS-ESD:
+    gauge: 0.5
+    show_equiv: true
     type: By others
     show_wirecount: false
-    wirecount: 2
-    color_code: BW
+    color: BK
+    colors: [BN, LB, GNYE]
     show_wirenumbers: false
+    manufacturer: Sermes
+    mpn: "12251154"
+    notes: |
+      U 1000 RVFV RH 3G2,5 TGL
 
   DCS-MODBUS:
     type: By others
     show_wirecount: false
-    wirecount: 3
-    #color_code: BW
+    wirecount: 4
     show_wirenumbers: false
     color_code: DIN
     shield: true
@@ -427,14 +431,14 @@ connections:
     - +AJB-XESD: [1L, 2L]
 
   -
-    - +AJB-XESD: [1L, 2L]
-    - SIS-ESD: [1, 2]
-    - +SIS-XESD: [+, -]
+    - +AJB-XESD: [1L, 2L, 3L]
+    - SIS-ESD: [1, 2, 3]
+    - +SIS-XESD: [+, -, PE]
 
   -
-    - +DCS-MODBUS: [D1, D0, COM, SHIELD]
-    - DCS-MODBUS: [1-3, s]
-    - +MCP-X6: [1-4]
+    - +DCS-MODBUS: [D1, D0, COM, SPARE, SHIELD]
+    - DCS-MODBUS: [1-4, s]
+    - +MCP-X6: [1-5]
 
   -
     - +DCS-ANALOG: [1-3]
