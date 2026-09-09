@@ -21,25 +21,45 @@ connectors:
     show_pincount: false
     notes: 48 VDC ESD Power
   
-  +DCS-DISCRETE:
+  # +DCS-DISCRETE:
+  #   type: By others
+  #   pinlabels: [ESD Alarm +, ESD Alarm -, 
+  #               Auto Alarm +, Auto Alarm -, 
+  #               Trouble Alarm +, Trouble Alarm -,
+  #               Mode Bit 0 +, Mode Bit 0 -,
+  #               Mode Bit 1 +, Mode Bit 1 -,
+  #               Mode Bit 2 +, Mode Bit 2]
+  #   show_pincount: false
+  
+  +DCS-INSTRUMENT:
     type: By others
-    pinlabels: [ESD Alarm +, ESD Alarm -, 
+    pinlabels: [ZC +, ZC -,
+                ZI +, ZI -,
+                PT ACC +, PT ACC -,
+                PT A +, PT A -,
+                PT B +, PT B -,
+                ESD Alarm +, ESD Alarm -, 
                 Auto Alarm +, Auto Alarm -, 
                 Trouble Alarm +, Trouble Alarm -,
                 Mode Bit 0 +, Mode Bit 0 -,
                 Mode Bit 1 +, Mode Bit 1 -,
-                Mode Bit 2 +, Mode Bit 2]
+                Mode Bit 2 +, Mode Bit 2 -,
+                SHIELD]
     show_pincount: false
+    notes: |
+      Shield grounded at DCS end only
+      Unused cores terminated and earthed at DCS end
+        per 60079-14 8.2.3.2
   
-  +DCS-ANALOG:
-    type: By others
-    pinlabels: [ #SHIELD, 
-                ZC +, ZC -, SHIELD,
-                ZI +, ZC -, SHIELD,
-                PT ACC +, PT ACC -, SHIELD,
-                PT A +, PT A -, SHIELD,
-                PT B +, PT B -, SHIELD]
-    show_pincount: false
+  # +DCS-ANALOG:
+  #   type: By others
+  #   pinlabels: [ #SHIELD, 
+  #               ZC +, ZC -, SHIELD,
+  #               ZI +, ZC -, SHIELD,
+  #               PT ACC +, PT ACC -, SHIELD,
+  #               PT A +, PT A -, SHIELD,
+  #               PT B +, PT B -, SHIELD]
+  #   show_pincount: false
   
   +SUPPLY-X400:
     type: By others
@@ -97,29 +117,41 @@ connectors:
       width: 200
 
   +MCP-X3:
-    pincount: 12
+    pincount: 13
     show_pincount: false
     notes: |
-      Loop power supplied by DCS.
-      MCP discrete outputs are dry contacts.
+      Terminate unused cores per IEC 60079-14 8.2.3.2.
 
-  +MCP-X5(T1):
-    pins: [1U, 1M, 1L]
+  +MCP-X5:
+    pins: [1U, 1M,
+           2U, 2M,
+           3U, 3M,
+           4U, 4M,
+           5U, 5M]
     show_pincount: false
-    notes: Loop power supplied by MCP power supply unit.
-    image:
-      src: ./img/3-deck-analog-earthing.png
-      caption: 3-deck fuse terminal block with shield to rail.
-      width: 200
+    # image:
+    #   src: ./img/3-deck-analog-earthing.png
+    #   caption: 3-deck fuse terminal block with shield to rail.
+    #   width: 200
 
-  +MCP-X5(T2-T5):
-    pins: [2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L]
-    show_pincount: false
-    notes: Loop power supplied by MCP signal isolator.
-    image:
-      src: ./img/3-deck-knife.png
-      caption: 3-deck knife disconnect terminal block with shield to rail.
-      width: 200
+
+  # +MCP-X5(T1):
+  #   pins: [1U, 1M, 1L]
+  #   show_pincount: false
+  #   notes: Loop power supplied by MCP power supply unit.
+  #   image:
+  #     src: ./img/3-deck-analog-earthing.png
+  #     caption: 3-deck fuse terminal block with shield to rail.
+  #     width: 200
+
+  # +MCP-X5(T2-T5):
+  #   pins: [2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L]
+  #   show_pincount: false
+  #   notes: Loop power supplied by MCP signal isolator.
+  #   image:
+  #     src: ./img/3-deck-knife.png
+  #     caption: 3-deck knife disconnect terminal block with shield to rail.
+  #     width: 200
 
   +MCP-X6:
     pincount: 5
@@ -323,21 +355,57 @@ cables:
     show_wirecount: false
     colors: [GNYE]
 
-  DCS-ANALOG:
+  DCS-INSTRUMENT:
     type: By others
+    gauge: 0.88
+    show_equiv: true
+    color: BU
+    colors: [RD, WH,
+             RD, WH,
+             RD, WH,
+             RD, WH,
+             RD, WH,
+             RD, WH,
+             RD, WH,
+             RD, WH,
+             RD, WH,
+             RD, WH,
+             RD, WH]
+    wirelabels: [PR1, PR1,
+                  PR2, PR2,
+                  PR3, PR3,
+                  PR4, PR4,
+                  PR5, PR5,
+                  PR6, PR6,
+                  PR7, PR7,
+                  PR8, PR8,
+                  PR9, PR9,
+                  PR10, PR10,
+                  PR11, PR11]
     shield: true
+    manufacturer: Sermes
+    mpn: "14483064"
     show_wirecount: false
-    colors: [BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR]
-    wirelabels: [1(BK), 1(WH), SHIELD (PAIR 1), 2(BK), 2(WH), SHIELD (PAIR 2), 3(BK), 3(WH), SHIELD (PAIR 3), 4(BK), 4(WH), SHIELD (PAIR 4), 5(BK), 5(WH), SHIELD (PAIR 5)]
-    inner_shields: [SHIELD (PAIR 1), SHIELD (PAIR 2), SHIELD (PAIR 3), SHIELD (PAIR 4), SHIELD (PAIR 5)]
     show_wirenumbers: false
+    notes: |
+      19IP09EGFA - BLEU19IP09EGFA - BLEU
+      Pairs 12 - 19 unused
 
-  DCS-DISCRETE:
-    type: By others
-    show_wirecount: false
-    wirecount: 12
-    color_code: BW
-    show_wirenumbers: false
+  # DCS-ANALOG:
+  #   type: By others
+  #   shield: true
+  #   show_wirecount: false
+  #   colors: [BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR]
+  #   wirelabels: [1(BK), 1(WH), SHIELD (PAIR 1), 2(BK), 2(WH), SHIELD (PAIR 2), 3(BK), 3(WH), SHIELD (PAIR 3), 4(BK), 4(WH), SHIELD (PAIR 4), 5(BK), 5(WH), SHIELD (PAIR 5)]
+  #   inner_shields: [SHIELD (PAIR 1), SHIELD (PAIR 2), SHIELD (PAIR 3), SHIELD (PAIR 4), SHIELD (PAIR 5)]
+  #   show_wirenumbers: false
+
+  # DCS-DISCRETE:
+  #   type: By others
+  #   show_wirecount: false
+  #   wirecount: 12
+  #   color_code: BW
+  #   show_wirenumbers: false
 
   SIS-ESD:
     gauge: 0.5
@@ -441,19 +509,29 @@ connections:
     - +MCP-X6: [1-5]
 
   -
-    - +DCS-ANALOG: [1-3]
-    - DCS-ANALOG: [1-3]
-    - +MCP-X5(T1): [1U, 1M, 1L]
+    - +DCS-INSTRUMENT: [1-10]
+    - DCS-INSTRUMENT: [1-10]
+    - +MCP-X5: [1U, 1M, 2U, 2M, 3U, 3M, 4U, 4M, 5U, 5M]
 
   -
-    - +DCS-ANALOG: [4-15]
-    - DCS-ANALOG: [4-15]
-    - +MCP-X5(T2-T5): [2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L]
+    - +DCS-INSTRUMENT: [11-23]
+    - DCS-INSTRUMENT: [11-22, s]
+    - +MCP-X3: [1-13]
 
-  -
-    - +DCS-DISCRETE: [1-12]
-    - DCS-DISCRETE: [1-12]
-    - +MCP-X3: [1-12]
+  # -
+  #   - +DCS-ANALOG: [1-3]
+  #   - DCS-ANALOG: [1-3]
+  #   - +MCP-X5(T1): [1U, 1M, 1L]
+
+  # -
+  #   - +DCS-ANALOG: [4-15]
+  #   - DCS-ANALOG: [4-15]
+  #   - +MCP-X5(T2-T5): [2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L]
+
+  # -
+  #   - +DCS-DISCRETE: [1-12]
+  #   - DCS-DISCRETE: [1-12]
+  #   - +MCP-X3: [1-12]
 
   -
     - +SUPPLY-X230: [L, N]
