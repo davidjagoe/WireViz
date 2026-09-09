@@ -89,7 +89,7 @@ connectors:
     show_pincount: false
 
   +MCP-X4: &field-analog-terminals
-    pins: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L, SHIELD]
+    pins: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, SHIELD]
     show_pincount: false
     image:
       src: ./img/3-deck-analog-earthing.png
@@ -135,11 +135,11 @@ connectors:
     show_pincount: false
 
   +DP-X3: &dp-x3
-    pincount: 9
+    pincount: 16
     show_pincount: false
 
   +DP-X4: &dp-x4
-    pincount: 9
+    pincount: 16
     show_pincount: false
 
 
@@ -204,16 +204,16 @@ connectors:
 
 cables:
 
-  ACTUATOR-PE:
-    category: bundle
-    length: 25 ft
-    wirecount: 1
-    show_wirecount: false
-    colors: [GNYE]
-    pn: HOLD
-    manufacturer: HOLD
-    mpn: HOLD
-    notes: O.D. HOLD
+  # ACTUATOR-PE:
+  #   category: bundle
+  #   length: 25 ft
+  #   wirecount: 1
+  #   show_wirecount: false
+  #   colors: [GNYE]
+  #   pn: HOLD
+  #   manufacturer: HOLD
+  #   mpn: HOLD
+  #   notes: O.D. HOLD
 
   ACTUATOR-DISCRETE:
     # gauge:
@@ -242,23 +242,21 @@ cables:
     notes: O.D. HOLD
 
   ACTUATOR-ANALOG:
-    gauge: 0.5
+    gauge: 0.75
     show_equiv: true
     shield: true
     length: 25 ft
     color: BK
-    colors: [BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, OG]
-    wirelabels: [1(BK), 1(WH), SHIELD (PAIR 1), 2(BK), 2(WH), SHIELD (PAIR 2), 3(BK), 3(WH), SHIELD (PAIR 3), 4(BK), 4(WH), SHIELD (PAIR 4), 5(BK), 5(WH), SHIELD (PAIR 5), 6(BK), 6(WH), SHIELD (PAIR 6), 7(BK), 7(WH), SHIELD (PAIR 7), 8(BK), 8(WH), SHIELD (PAIR 8), SPARE]
-    inner_shields: [SHIELD (PAIR 1), SHIELD (PAIR 2), SHIELD (PAIR 3), SHIELD (PAIR 4), SHIELD (PAIR 5), SHIELD (PAIR 6), SHIELD (PAIR 7), SHIELD (PAIR 8)]
+    colors: [BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR]
+    wirelabels: [1(BK), 1(WH), SHIELD (PAIR 1), 2(BK), 2(WH), SHIELD (PAIR 2), 3(BK), 3(WH), SHIELD (PAIR 3), 4(BK), 4(WH), SHIELD (PAIR 4), 5(BK), 5(WH), SHIELD (PAIR 5)]
+    inner_shields: [SHIELD (PAIR 1), SHIELD (PAIR 2), SHIELD (PAIR 3), SHIELD (PAIR 4), SHIELD (PAIR 5)]
     show_wirenumbers: false
     show_wirecount: false
-    pn: HOLD
-    manufacturer: Lapp
-    mpn: "0032450"
+    manufacturer: Lynxeo
+    mpn: "10168748"
     notes: |
-      O.D. 0.567 in
-      Pair 8 and OG core unused.
-      Coil, mark, and insulate at both ends.
+      EN 50288-7 XLPE IOS Armoured 5 x 2 x 0,75
+      Pair 5 spare
 
   ESD-STATUS:
     gauge: 1
@@ -274,39 +272,38 @@ cables:
     notes: O.D. 0.22 in
 
   M1-POWER: &motor_power
-    gauge: 12 AWG
+    gauge: 4
     show_equiv: true
     length: 25 ft
     color: BK
-    colors: [GNYE, BK, BK, BK]
+    colors: [GNYE, BK, BN, GY]
     wirecount: 4
     show_wirecount: false
     shield: true
-    pn: 10300516
-    manufacturer: LUTZE
-    mpn: A3311204
-    notes: OD 0.437 in (11.1 mm)
+    manufacturer: ELAND
+    mpn: A7HSWA04040LS
+    notes: |
+      IEC 60502-1 XLPE double shield, SWA armor, 4 x 4
 
   M2-POWER:
     <<: *motor_power
     
   M1-RESOLVER: &resolver
+    gauge: 0.5
+    show_equiv: true
     length: 25 ft
-    color: GN
-    colors: [WH, BN, SR, GN, YE, SR, PK, GY]
-    wirelabels: [PR1(A+), PR1(A-), SHIELD (PAIR 1), PR2(B+), PR2(B-), SHIELD (PAIR 2), V+, V-]
-    inner_shields: [SHIELD (PAIR 1), SHIELD (PAIR 2)]
+    color: BK
+    colors: [BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR, BK, WH, SR]
+    wirelabels: [PR1(A+), PR1(A-), SHIELD (PAIR 1), PR2(B+), PR2(B-), SHIELD (PAIR 2), PR3(V+), PR3(V-), SHIELD (PAIR 3), PR4 (SPARE), PR4 (SPARE), SHIELD (PAIR 4), PR5 (SPARE), PR5 (SPARE), SHIELD (PAIR 5)]
+    inner_shields: [SHIELD (PAIR 1), SHIELD (PAIR 2), SHIELD (PAIR 3), SHIELD (PAIR 4), SHIELD (PAIR 5)]
     show_wirecount: false
     shield: true
-    pn: 103xxxxx
-    manufacturer: Lapp
-    mpn: "0036929"
+    manufacturer: Lynxeo
+    mpn: "10168665"
     show_wirecount: false
     show_wirenumbers: false
     notes: |
-      Resolver cable
-      2 x (2 x 0.25 mm) + 2 x 0.5 mm
-      O.D. 0.343 in (8.7 mm)
+      EN 50288-7 XLPE IOS Armoured 5 x 2 x 0,5
     
   M2-RESOLVER:
     <<: *resolver
@@ -380,14 +377,14 @@ connections:
   #   - CONTACTS.25K4: [11, 14]
 
   -
-    - +DP-X4: [1-9]
-    - M2-RESOLVER: [1-8, s]
-    - +AJB-X4: [1-9]
+    - +DP-X4: [1-16]
+    - M2-RESOLVER: [1-15, s]
+    - +AJB-X4: [1-16]
 
   -
-    - +DP-X3: [1-9]
-    - M1-RESOLVER: [1-8, s]
-    - +AJB-X3: [1-9]
+    - +DP-X3: [1-16]
+    - M1-RESOLVER: [1-15, s]
+    - +AJB-X3: [1-16]
 
   -
     - +DP-X2: [PE, 1, 2, 3, 4]
@@ -400,9 +397,9 @@ connections:
     - +AJB-X1: [PE, 1, 2, 3, 4]
 
   -
-    - +MCP-X4: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L, SHIELD]
-    - ACTUATOR-ANALOG: [1-21, s]
-    - +AJB-X4-MCP: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, 6U, 6M, 6L, 7U, 7M, 7L, SHIELD]
+    - +MCP-X4: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, SHIELD]
+    - ACTUATOR-ANALOG: [1-15, s]
+    - +AJB-X4-MCP: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, SHIELD]
 
   -
     - +MCP-X2: [2-6]
@@ -414,10 +411,10 @@ connections:
     - ACTUATOR-DC-POWER: [6]
     - +AJB-X2-MCP: [1U]
 
-  -
-    - +MCP-X1: [PE]
-    - ACTUATOR-PE: [1]
-    - +AJB-XEA: [PE]
+  # -
+  #   - +MCP-X1: [PE]
+  #   - ACTUATOR-PE: [1]
+  #   - +AJB-XEA: [PE]
 
   -
     - +MCP-X1: [2-6]
