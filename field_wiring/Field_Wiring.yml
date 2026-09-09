@@ -81,11 +81,11 @@ connectors:
     show_pincount: false
 
   +MCP-X1:
-    pins: [PE, 1, 2, 3, 4, 5, 6]
+    pins: [1, 2, 3, 4, 5, 6, 7]
     show_pincount: false
 
   +MCP-X2:
-    pins: [1, 2, 3, 4, 5, 6]
+    pins: [1, 2, 3, 4, 5, 6, 7]
     show_pincount: false
 
   +MCP-X4: &field-analog-terminals
@@ -149,8 +149,8 @@ connectors:
     show_pincount: false
 
   +AJB-X1-MCP:
-    pins: [1, 2L, 3U, 4U, 5U, 6U]
-    pincolors: [None, BU, BU, BU, BU, BU]
+    pins: [1, 2L, 3U, 4U, 5U, 6U, 7]
+    pincolors: [None, BU, BU, BU, BU, BU, None]
     show_pincount: false
     image:
       src: ./img/3-deck-upper.png
@@ -162,8 +162,8 @@ connectors:
       * (Terminals for field wiring marked BU for clarity.)
       
   +AJB-X2-MCP:
-    pins: [1U, 2L, 3L, 4L, 5L, 6L]
-    pincolors: [BU, BU, BU, BU, BU, BU]
+    pins: [1U, 2L, 3L, 4L, 5L, 6L, 7]
+    pincolors: [BU, BU, BU, BU, BU, BU, NONE]
     show_pincount: false
     image:
       src: ./img/3-deck-lower.png
@@ -216,30 +216,30 @@ cables:
   #   notes: O.D. HOLD
 
   ACTUATOR-DISCRETE:
-    # gauge:
-    # show_equiv: true
+    gauge: 1.5
+    show_equiv: true
     length: 25 ft
-    # color: BK
-    color_code: DIN
-    wirecount: 5
+    color: BK
+    colors: [BK, BK, BK, BK, BK, BK, BK]
     show_wirecount: false
-    pn: HOLD
-    manufacturer: Lapp
-    mpn: HOLD
-    notes: O.D. HOLD
+    manufacturer: Lynxeo
+    mpn: "10108697"
+    notes: |
+      IEC 60502-1 Armoured (SWA) 7 x 1,5
+      Core 7 spare
 
   ACTUATOR-DC-POWER:
-    # gauge:
-    # show_equiv: true
+    gauge: 1.5
+    show_equiv: true
     length: 25 ft
-    # color: BK
-    color_code: DIN
-    wirecount: 6
+    color: BK
+    colors: [BK, BK, BK, BK, BK, BK, BK]
     show_wirecount: false
-    pn: HOLD
-    manufacturer: Lapp
-    mpn: HOLD
-    notes: O.D. HOLD
+    manufacturer: Lynxeo
+    mpn: "10108697"
+    notes: |
+      IEC 60502-1 Armoured (SWA) 7 x 1,5
+      Core 1 and core 7 spare
 
   ACTUATOR-ANALOG:
     gauge: 0.75
@@ -402,14 +402,14 @@ connections:
     - +AJB-X4-MCP: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, SHIELD]
 
   -
-    - +MCP-X2: [2-6]
-    - ACTUATOR-DISCRETE: [1-5]
-    - +AJB-X2-MCP: [2L, 3L, 4L, 5L, 6L]
+    - +MCP-X2: [1-7]
+    - ACTUATOR-DISCRETE: [1-7]
+    - +AJB-X2-MCP: [1U, 2L, 3L, 4L, 5L, 6L, 7]
 
-  -
-    - +MCP-X2: [1]
-    - ACTUATOR-DC-POWER: [6]
-    - +AJB-X2-MCP: [1U]
+  # -
+  #   - +MCP-X2: [1]
+  #   - ACTUATOR-DC-POWER: [7]
+  #   - +AJB-X2-MCP: [1U]
 
   # -
   #   - +MCP-X1: [PE]
@@ -417,9 +417,9 @@ connections:
   #   - +AJB-XEA: [PE]
 
   -
-    - +MCP-X1: [2-6]
-    - ACTUATOR-DC-POWER: [1-5]
-    - +AJB-X1-MCP: [2L, 3U, 4U, 5U, 6U]
+    - +MCP-X1: [1-7]
+    - ACTUATOR-DC-POWER: [1-7]
+    - +AJB-X1-MCP: [1, 2L, 3U, 4U, 5U, 6U, 7]
 
   -
     - +MCP-XESD: [1, 2]
