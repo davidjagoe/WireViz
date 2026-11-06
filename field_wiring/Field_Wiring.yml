@@ -342,9 +342,15 @@ cables:
 # Customer provided cables
 
   SUPPLY-400V:
+    gauge: 4
+    show_equiv: true
     type: By others
     show_wirecount: false
+    color: BK
     colors: [BKBN, BK, BKGY, LB, GNYE]
+    show_wirenumbers: false
+    manufacturer: Sermes
+    mpn: U 1000 RVFV RH 5G4 TGL
     
   SUPPLY-230V:
     gauge: 25
