@@ -86,9 +86,8 @@ connectors:
     pins: [1, 3, 5, N]
     show_pincount: false
 
-  +MCP/6Q2:
-    type: Circuit breaker
-    pins: [1, 3]
+  +MCP-XAC:
+    pins: [L, N]
     show_pincount: false
 
   +MCP-XEA:
@@ -552,7 +551,7 @@ connections:
   -
     - +SUPPLY-X230: [L, N]
     - SUPPLY-230V: [1, 2]
-    - +MCP/6Q2: [1, 3]
+    - +MCP-XAC: [L, N]
 
   -
     - +LOCAL-EARTH: [1]
