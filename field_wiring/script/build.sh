@@ -9,6 +9,8 @@
 # NOTE: currently assumes this script is run from the root of the
 # WireViz repo, and hard-codes where the yml file lives
 
+# $ zsh field_wiring/script/build.sh
+
 # TODO:
 # - Pass in path of source files
 # - Remove hardcoding of field_wiring/ path
