@@ -347,9 +347,15 @@ cables:
     colors: [BKBN, BK, BKGY, LB, GNYE]
     
   SUPPLY-230V:
+    gauge: 25
+    show_equiv: true
     type: By others
     show_wirecount: false
-    colors: [BN, LB]
+    color: BK
+    colors: [BN, LB, GNYE]
+    show_wirenumbers: false
+    manufacturer: Sermes
+    mpn: "U 1000 RVFV RH 3G25 TGL"
 
   LOCAL-EARTH:
     show_wirecount: false
@@ -408,7 +414,7 @@ cables:
   #   show_wirenumbers: false
 
   SIS-ESD:
-    gauge: 0.5
+    gauge: 2.5
     show_equiv: true
     type: By others
     show_wirecount: false
@@ -421,15 +427,19 @@ cables:
       U 1000 RVFV RH 3G2,5 TGL
 
   DCS-MODBUS:
+    gauge: 24 AWG
+    show_equiv: true
     type: By others
     show_wirecount: false
-    wirecount: 4
+    color: GY
+    colors: [OG, WHOG, BU, WHBU]
     show_wirenumbers: false
-    color_code: DIN
     shield: true
+    manufacturer: "Adaltra"
+    mpn: "LCAEMPSS224120SH"
     notes: |
-      Lapp UNITRONIC Li2YCYv (TP) 
-      P/N 0031355 or equivalent
+      2 x 2 x AWG 24
+      Modbus RS485, Z0=120
     
 
 
@@ -540,7 +550,7 @@ connections:
 
   -
     - +LOCAL-EARTH: [1]
-    - LOCAL-EARTH: [1]
+    - SUPPLY-230V: [3]
     - +MCP-XEA: [2]
 
   -
