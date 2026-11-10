@@ -192,9 +192,9 @@ connectors:
 
 
   # Actuator Junction Box
-  +AJB-XEA:
-    pins: [PE]
-    show_pincount: false
+  # +AJB-XEA:
+  #   pins: [PE]
+  #   show_pincount: false
 
   +AJB-X1-MCP:
     pins: [1, 2L, 3U, 4U, 5U, 6U, 7]
@@ -359,8 +359,12 @@ cables:
     type: Pigtail
     colors: [RD, BU, GN, YE, VT, WH]
     show_wirenumbers: false
+    show_wirecount: false
     manufacturer: Phoenix Contact
     mpn: "FOC-PT9:SC-OM3"
+    notes: |
+      Termination of pigtail to +MCP/45XH1 by MEA.
+      Splice of LightMax cable to pigtail by others.
 
 # Customer provided cables
 
@@ -394,9 +398,9 @@ cables:
     manufacturer: Sermes
     mpn: "U 1000 RVFV RH 3G25 TGL"
 
-  LOCAL-EARTH:
-    show_wirecount: false
-    colors: [GNYE]
+  # LOCAL-EARTH:
+  #   show_wirecount: false
+  #   colors: [GNYE]
 
   DCS-INSTRUMENT:
     type: By others
@@ -496,14 +500,77 @@ connections:
   #   - CONTACTS.25K4: [11, 14]
 
   -
-    - +DP-X4: [1-16]
-    - M2-RESOLVER: [1-15, s]
-    - +AJB-X4: [1-16]
+    - +SUPPLY-X230: [L, N]
+    - SUPPLY-230V: [1, 2]
+    - +MCP-XAC: [L, N]
 
   -
-    - +DP-X3: [1-16]
-    - M1-RESOLVER: [1-15, s]
-    - +AJB-X3: [1-16]
+    - +LOCAL-EARTH: [1]
+    - SUPPLY-230V: [3]
+    - +MCP-XEA: [2]
+
+  -
+    - +SUPPLY-X400: [L1, L2, L3, N]
+    - SUPPLY-400V: [1-4]
+    - +MCP/6Q1: [1, 3, 5, N]
+
+  -
+    - +SUPPLY-X400: [PE]
+    - SUPPLY-400V: [5]
+    - +MCP-XEA: [1]
+
+  -
+    - +MCP-XESD: [1, 2]
+    - ESD-STATUS: [1, 2]
+    - +AJB-XESD: [1L, 2L]
+
+  -
+    - +AJB-XESD: [1L, 2L, 3L]
+    - SIS-ESD: [1, 2, 3]
+    - +SIS-XESD: [+, -, PE]
+
+  -
+    - +DCS-INSTRUMENT: [1-10]
+    - DCS-INSTRUMENT: [1-10]
+    - +MCP-X5: [1U, 1M, 2U, 2M, 3U, 3M, 4U, 4M, 5U, 5M]
+
+  -
+    - +DCS-INSTRUMENT: [11-23]
+    - DCS-INSTRUMENT: [11-22, s]
+    - +MCP-X3: [1-13]
+
+  -
+    - +DCS-MODBUS: [D1, D0, COM, SPARE, SHIELD]
+    - DCS-MODBUS: [1-4, s]
+    - +MCP-X6: [1-5]
+
+  -
+    - +CONTROL-ROOM: [1-6]
+    - FIBER: [1-6]
+    - [S., S., S., S., S., S.]
+    - FIBER-PIGTAIL: [1-6]
+    - +MCP/45XH1: [1A, 1B, 2A, 2B, 3A, 3B]
+
+
+  # -
+  #   - +DCS-ANALOG: [1-3]
+  #   - DCS-ANALOG: [1-3]
+  #   - +MCP-X5(T1): [1U, 1M, 1L]
+
+  # -
+  #   - +DCS-ANALOG: [4-15]
+  #   - DCS-ANALOG: [4-15]
+  #   - +MCP-X5(T2-T5): [2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L]
+
+  # -
+  #   - +DCS-DISCRETE: [1-12]
+  #   - DCS-DISCRETE: [1-12]
+  #   - +MCP-X3: [1-12]
+
+  -
+    - +DP-X1: [PE, 1, 2, 3, 4]
+    - M1-POWER: [1, 2, 3, 4, s]
+    - +AJB-X1: [PE, 1, 2, 3, 4]
 
   -
     - +DP-X2: [PE, 1, 2, 3, 4]
@@ -511,9 +578,14 @@ connections:
     - +AJB-X2: [PE, 1, 2, 3, 4]
 
   -
-    - +DP-X1: [PE, 1, 2, 3, 4]
-    - M1-POWER: [1, 2, 3, 4, s]
-    - +AJB-X1: [PE, 1, 2, 3, 4]
+    - +DP-X3: [1-16]
+    - M1-RESOLVER: [1-15, s]
+    - +AJB-X3: [1-16]
+
+  -
+    - +DP-X4: [1-16]
+    - M2-RESOLVER: [1-15, s]
+    - +AJB-X4: [1-16]
 
   -
     - +MCP-X4: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, SHIELD]
@@ -540,73 +612,6 @@ connections:
     - ACTUATOR-DC-POWER: [1-7]
     - +AJB-X1-MCP: [1, 2L, 3U, 4U, 5U, 6U, 7]
 
-  -
-    - +MCP-XESD: [1, 2]
-    - ESD-STATUS: [1, 2]
-    - +AJB-XESD: [1L, 2L]
-
-  -
-    - +AJB-XESD: [1L, 2L, 3L]
-    - SIS-ESD: [1, 2, 3]
-    - +SIS-XESD: [+, -, PE]
-
-  -
-    - +DCS-MODBUS: [D1, D0, COM, SPARE, SHIELD]
-    - DCS-MODBUS: [1-4, s]
-    - +MCP-X6: [1-5]
-
-  -
-    - +CONTROL-ROOM: [1-6]
-    - FIBER: [1-6]
-    - [S., S., S., S., S., S.]
-    - FIBER-PIGTAIL: [1-6]
-    - +MCP/45XH1: [1A, 1B, 2A, 2B, 3A, 3B]
-
-
-  -
-    - +DCS-INSTRUMENT: [1-10]
-    - DCS-INSTRUMENT: [1-10]
-    - +MCP-X5: [1U, 1M, 2U, 2M, 3U, 3M, 4U, 4M, 5U, 5M]
-
-  -
-    - +DCS-INSTRUMENT: [11-23]
-    - DCS-INSTRUMENT: [11-22, s]
-    - +MCP-X3: [1-13]
-
-  # -
-  #   - +DCS-ANALOG: [1-3]
-  #   - DCS-ANALOG: [1-3]
-  #   - +MCP-X5(T1): [1U, 1M, 1L]
-
-  # -
-  #   - +DCS-ANALOG: [4-15]
-  #   - DCS-ANALOG: [4-15]
-  #   - +MCP-X5(T2-T5): [2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L]
-
-  # -
-  #   - +DCS-DISCRETE: [1-12]
-  #   - DCS-DISCRETE: [1-12]
-  #   - +MCP-X3: [1-12]
-
-  -
-    - +SUPPLY-X230: [L, N]
-    - SUPPLY-230V: [1, 2]
-    - +MCP-XAC: [L, N]
-
-  -
-    - +LOCAL-EARTH: [1]
-    - SUPPLY-230V: [3]
-    - +MCP-XEA: [2]
-
-  -
-    - +SUPPLY-X400: [L1, L2, L3, N]
-    - SUPPLY-400V: [1-4]
-    - +MCP/6Q1: [1, 3, 5, N]
-
-  -
-    - +SUPPLY-X400: [PE]
-    - SUPPLY-400V: [5]
-    - +MCP-XEA: [1]
 
 tweak:
   append:
