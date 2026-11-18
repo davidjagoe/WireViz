@@ -95,16 +95,12 @@ connectors:
   # Main Control Panel
 
   +MCP-X4_ZT1:
-    pincount: 6
+    pincount: 9
     show_pincount: false
-    notes: |
-      Terminate unused cores per IEC 60079-14 8.2.3.2.
 
   +MCP-X4_ZT2:
-    pincount: 6
+    pincount: 9
     show_pincount: false
-    notes: |
-      Terminate unused cores per IEC 60079-14 8.2.3.2.
 
   +MCP/45XH1:
     pins: [1A, 1B, 2A, 2B, 3A, 3B, 4A, 4B, 5A, 5B, 6A, 6B]
@@ -209,16 +205,12 @@ connectors:
   #   show_pincount: false
 
   +AJB-X4_ZT1:
-    pincount: 6
+    pincount: 9
     show_pincount: false
-    notes: |
-      Terminate unused cores per IEC 60079-14 8.2.3.2.
 
   +AJB-X4_ZT2:
-    pincount: 6
+    pincount: 9
     show_pincount: false
-    notes: |
-      Terminate unused cores per IEC 60079-14 8.2.3.2.
 
   +AJB-X1-MCP:
     pins: [1, 2L, 3U, 4U, 5U, 6U, 7]
@@ -292,15 +284,14 @@ cables:
     show_equiv: true
     length: 25 ft
     color: BK
-    colors: [BK, WH, BK, WH, BK, WH]
-    wirelabels: [PR1(BK), PR1(WH), PR2(BK), PR2(WH), PR3(BK), PR3(WH)]
+    colors: [BK, WH, BK, WH, BK, WH, BK, WH]
+    wirelabels: [PR1(BK), PR1(WH), PR2(BK), PR2(WH), PR3(BK), PR3(WH), PR4(BK), PR4(WH)]
     show_wirecount: false
     shield: true
     manufacturer: Lynxeo
     mpn: 10098180
     notes: |
       RE-2Y(St)YSWAY - fl OS Armoured LSLH 4 x 2 x 0.75
-      Pair 4 spare
 
 
   ACTUATOR-ZT2:
@@ -308,15 +299,14 @@ cables:
     show_equiv: true
     length: 25 ft
     color: BK
-    colors: [BK, WH, BK, WH, BK, WH]
-    wirelabels: [PR1(BK), PR1(WH), PR2(BK), PR2(WH), PR3(BK), PR3(WH)]
+    colors: [BK, WH, BK, WH, BK, WH, BK, WH]
+    wirelabels: [PR1(BK), PR1(WH), PR2(BK), PR2(WH), PR3(BK), PR3(WH), PR4(BK), PR4(WH)]
     show_wirecount: false
     shield: true
     manufacturer: Lynxeo
     mpn: 10098180
     notes: |
       RE-2Y(St)YSWAY - fl OS Armoured LSLH 4 x 2 x 0.75
-      Pair 4 spare
 
 
   ACTUATOR-DISCRETE:
@@ -649,14 +639,14 @@ connections:
     - +AJB-X4-MCP: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, SHIELD]
 
   - 
-    - +MCP-X4_ZT1: [1-6]
-    - ACTUATOR-ZT1: [PR1(BK), PR1(WH), PR2(BK), PR3(BK), PR3(WH), s]
-    - +AJB-X4_ZT1: [1-6]
+    - +MCP-X4_ZT1: [1-9]
+    - ACTUATOR-ZT1: [PR1(BK), PR1(WH), PR2(BK), PR2(WH), PR3(BK), PR3(WH), PR4(BK), PR4(WH), s]
+    - +AJB-X4_ZT1: [1-9]
 
   - 
-    - +MCP-X4_ZT2: [1-6]
-    - ACTUATOR-ZT2: [PR1(BK), PR1(WH), PR2(BK), PR3(BK), PR3(WH), s]
-    - +AJB-X4_ZT2: [1-6]
+    - +MCP-X4_ZT2: [1-9]
+    - ACTUATOR-ZT2: [PR1(BK), PR1(WH), PR2(BK), PR2(WH), PR3(BK), PR3(WH), PR4(BK), PR4(WH), s]
+    - +AJB-X4_ZT2: [1-9]
 
   -
     - +MCP-X2: [1-7]
