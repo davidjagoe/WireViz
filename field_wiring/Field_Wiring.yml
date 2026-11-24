@@ -112,13 +112,13 @@ connectors:
   #   show_pincount: false
 
   +MCP-XAC:
-    pins: [L1, L2, L3, N, L, N']
+    pins: [L1, L2, L3, N, PE, L, N', PE']
     show_pincount: false
 
-  +MCP-XEA:
-    pins: [1, 2]
-    pinlabels: [PE, PE]
-    show_pincount: false
+  # +MCP-XEA:
+  #   pins: [1, 2]
+  #   pinlabels: [PE, PE]
+  #   show_pincount: false
 
   +MCP-XESD: &esd
     pins: [1, 2]
@@ -133,7 +133,7 @@ connectors:
     show_pincount: false
 
   +MCP-X4: &field-analog-terminals
-    pins: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, SHIELD]
+    pins: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, SH]
     show_pincount: false
     image:
       src: ./img/3-deck-analog-earthing.png
@@ -241,7 +241,8 @@ connectors:
       * (Terminals for field wiring marked BU for clarity.)
 
   +AJB-X4-MCP:
-    <<: *field-analog-terminals
+    pins: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, SH]
+    show_pincount: false
     image:
       src: ./img/3-deck-analog-thru.png
       caption: 3-deck through terminal block.
@@ -351,6 +352,7 @@ cables:
     notes: |
       EN 50288-7 XLPE IOS Armoured 5 x 2 x 0,75
       Pair 5 spare
+      Shields earthed only at +MCP
 
   ESD-STATUS:
     gauge: 1
@@ -397,6 +399,7 @@ cables:
     show_wirenumbers: false
     notes: |
       EN 50288-7 XLPE IOS Armoured 5 x 2 x 0,5
+      Shields earthed only at +MCP
     
   M2-RESOLVER:
     <<: *resolver
@@ -451,7 +454,7 @@ cables:
   DCS-INSTRUMENT:
     type: By others
     gauge: 0.88
-    show_equiv: true
+    show_equiv: false
     color: BU
     colors: [RD, WH,
              RD, WH,
@@ -546,9 +549,9 @@ connections:
   #   - CONTACTS.25K4: [11, 14]
 
   -
-    - +SUPPLY-X400: [L1, L2, L3, N]
-    - SUPPLY-400V: [1-4]
-    - +MCP-XAC: [L1, L2, L3, N]
+    - +SUPPLY-X400: [L1, L2, L3, N, PE]
+    - SUPPLY-400V: [1-5]
+    - +MCP-XAC: [L1, L2, L3, N, PE]
 
   -
     - +SUPPLY-X230: [L, N]
@@ -558,12 +561,12 @@ connections:
   -
     - +LOCAL-EARTH: [1]
     - SUPPLY-230V: [3]
-    - +MCP-XEA: [2]
+    - +MCP-XAC: [PE']
 
-  -
-    - +SUPPLY-X400: [PE]
-    - SUPPLY-400V: [5]
-    - +MCP-XEA: [1]
+  # -
+  #   - +SUPPLY-X400: [PE]
+  #   - SUPPLY-400V: [5]
+  #   - +MCP-XEA: [1]
 
   -
     - +MCP-XESD: [1, 2]
@@ -634,18 +637,18 @@ connections:
     - +AJB-X4: [1-16]
 
   -
-    - +MCP-X4: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, SHIELD]
+    - +MCP-X4: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, SH]
     - ACTUATOR-ANALOG: [1-15, s]
-    - +AJB-X4-MCP: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, SHIELD]
+    - +AJB-X4-MCP: [1U, 1M, 1L, 2U, 2M, 2L, 3U, 3M, 3L, 4U, 4M, 4L, 5U, 5M, 5L, SH]
 
   - 
     - +MCP-X4_ZT1: [1-9]
-    - ACTUATOR-ZT1: [PR1(BK), PR1(WH), PR2(BK), PR2(WH), PR3(BK), PR3(WH), PR4(BK), PR4(WH), s]
+    - ACTUATOR-ZT1: [PR1(BK), PR1(WH), PR2(BK), PR3(WH), PR3(BK), PR2(WH), PR4(BK), PR4(WH), s]
     - +AJB-X4_ZT1: [1-9]
 
   - 
     - +MCP-X4_ZT2: [1-9]
-    - ACTUATOR-ZT2: [PR1(BK), PR1(WH), PR2(BK), PR2(WH), PR3(BK), PR3(WH), PR4(BK), PR4(WH), s]
+    - ACTUATOR-ZT2: [PR1(BK), PR1(WH), PR2(BK), PR3(WH), PR3(BK), PR2(WH), PR4(BK), PR4(WH), s]
     - +AJB-X4_ZT2: [1-9]
 
   -
@@ -667,6 +670,10 @@ connections:
     - +MCP-X1: [1-7]
     - ACTUATOR-DC-POWER: [1-7]
     - +AJB-X1-MCP: [1, 2L, 3U, 4U, 5U, 6U, 7]
+
+
+options:
+  fontname: Courier
 
 
 tweak:
